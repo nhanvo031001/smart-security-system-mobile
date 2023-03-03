@@ -1,11 +1,17 @@
-import {Text, View} from "react-native";
+import {Button, Text, View} from "react-native";
 
 
-export default function Welcome () {
+export default function Welcome ({navigation}) {
 
     return (
         <View>
-            <Text>Event</Text>
+            <Text>Welcome</Text>
+            <Button
+                title="Go to Event"
+                onPress={() =>
+                    navigation.navigate('Event')
+                }
+            />
         </View>
     );
 }
