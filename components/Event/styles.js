@@ -21,4 +21,10 @@ export const styles = StyleSheet.create({
     headerFirst: {width: '50%', },
     headerSecond: {width: '10%', },
     headerThird: {width: '40%', },
+
+    flatListStyle: {
+        flexGrow: 0,
+        height: '90%',
+        marginTop: 10
+    }
 });

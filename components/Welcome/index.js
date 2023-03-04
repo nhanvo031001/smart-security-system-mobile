@@ -12,6 +12,13 @@ export default function Welcome ({navigation}) {
                     navigation.navigate('Event')
                 }
             />
+
+            <Button
+                title="Go to Configuration"
+                onPress={() =>
+                    navigation.navigate('Configuration')
+                }
+            />
         </View>
     );
 }

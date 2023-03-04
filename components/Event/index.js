@@ -1,9 +1,10 @@
-import {Button, Text, View, FlatList, TouchableOpacity} from "react-native";
+import {Button, Text, View, FlatList, TouchableOpacity, ScrollView} from "react-native";
 import dataEvents from '../../utils/dummyData/eventList.json';
 import dataIOTDevicesConfig from '../../utils/dummyData/managementIOTDeviceConfig.json';
 import iotDevices from '../../utils/dummyData/managementCameraDevice.json';
 import cameraDevices from '../../utils/dummyData/managementIOTDevice.json';
 import {useEffect, useState} from "react";
+import DateTimePicker from '@react-native-community/datetimepicker';
 import {styles} from "./styles";
 
 export default function Event({navigation}) {
@@ -12,15 +13,14 @@ export default function Event({navigation}) {
     const [eventsList, setEventsList] = useState([]);
     const [configurationIOTsList, setConfigurationIOTsList] = useState([]);
     const [devicesList, setDevicesList] = useState([]);
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
     const FlatListItem = (item, index) => {
-        let eventName = item['zone'];
-        let created_at = new Date(item['created_at']).toLocaleString();
-
         return <TouchableOpacity onPress={() => navigation.navigate('EventDetail', item)}>
             <View style={styles.itemBlock}>
-                <Text style={styles.itemFirst}>Cảm biến chuyển động mở cửa</Text>
-                <Text style={styles.itemSecond}>{eventName}</Text>
-                <Text style={styles.itemThird}>{created_at}</Text>
+                <Text style={styles.itemFirst}>{item.event_name}</Text>
+                <Text style={styles.itemSecond}>{item['zone']}</Text>
+                <Text style={styles.itemThird}>{item.created_at}</Text>
             </View>
         </TouchableOpacity>
     }
@@ -62,6 +62,19 @@ export default function Event({navigation}) {
 
         setEventsList(events);
     }
+    const onChangeStartDate = (event, selectedDate) => {
+        setStartDate(selectedDate);
+
+        // set events list
+    };
+    const onChangeEndDate = (event, selectedDate) => {
+        setEndDate(selectedDate);
+
+        // set events list
+    };
+    const handleResetEventsList = () => {
+
+    }
 
 
     useEffect(() => {
@@ -75,7 +88,36 @@ export default function Event({navigation}) {
 
     return (
         <View>
+
+            <View style={{display: 'flex', flexDirection: 'row'}}>
+                <Text style={{width: 120, height: 50, backgroundColor: 'red', paddingTop: 15}}>Ngày bắt đầu: </Text>
+                <DateTimePicker
+                    testID="dateTimePicker"
+                    value={startDate}
+                    mode='date'
+                    is24Hour={true}
+                    onChange={onChangeStartDate}
+                />
+            </View>
+
+            <View style={{display: 'flex', flexDirection: 'row'}}>
+                <Text style={{width: 120, height: 50, backgroundColor: 'yellow', paddingTop: 15}}>Ngày kết thúc: </Text>
+                <DateTimePicker
+                    testID="dateTimePicker"
+                    value={endDate}
+                    mode='date'
+                    is24Hour={true}
+                    onChange={onChangeEndDate}
+                />
+            </View>
+
+            <View>
+                <Button title='Reset' onPress={handleResetEventsList}/>
+            </View>
+
+
             <FlatList
+                style={styles.flatListStyle}
                 data={eventsList}
                 renderItem={({item, index}) => {
                     return (FlatListItem(item, index));
@@ -85,12 +127,7 @@ export default function Event({navigation}) {
             >
             </FlatList>
 
-            <Button
-                title="Go to Configuration"
-                onPress={() =>
-                    navigation.navigate('Configuration')
-                }
-            />
+
         </View>
     );
 }
