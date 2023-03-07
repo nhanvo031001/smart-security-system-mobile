@@ -5,14 +5,14 @@ export const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-around',
-        height: 60,
+        height: 50,
         borderBottomColor: 'white',
         borderBottomWidth: 1,
     },
 
-    itemFirst: {width: '50%', backgroundColor: 'red'},
-    itemSecond: {width: '10%', backgroundColor: 'yellow'},
-    itemThird: {width: '40%', backgroundColor: 'green'},
+    itemFirst: {width: '50%', backgroundColor: 'blue'},
+    itemSecond: {width: '20%', backgroundColor: 'orange'},
+    itemThird: {width: '30%', backgroundColor: 'grey'},
 
     header : {
         display: 'flex',
@@ -21,12 +21,12 @@ export const styles = StyleSheet.create({
     },
 
     headerFirst: {width: '50%', },
-    headerSecond: {width: '10%', },
-    headerThird: {width: '40%', },
+    headerSecond: {width: '20%', },
+    headerThird: {width: '30%', },
 
     flatListStyle: {
         flexGrow: 0,
-        height: '75%',
+        height: '90%',
         marginTop: 10
     }
 });

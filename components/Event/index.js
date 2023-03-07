@@ -6,6 +6,8 @@ import cameraDevices from '../../utils/dummyData/managementIOTDevice.json';
 import {useEffect, useState} from "react";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {styles} from "./styles";
+import {TextInput} from "react-native-paper";
+import {convertDate} from "../../utils/helper/helper";
 
 export default function Event({navigation}) {
     console.log("Event Page")
@@ -14,7 +16,9 @@ export default function Event({navigation}) {
     const [configurationIOTsList, setConfigurationIOTsList] = useState([]);
     const [devicesList, setDevicesList] = useState([]);
     const [startDate, setStartDate] = useState(new Date());
+    const [showStartDate, setShowStartDate] = useState(false);
     const [endDate, setEndDate] = useState(new Date());
+    const [showEndDate, setShowEndDate] = useState(false);
     const FlatListItem = (item, index) => {
         return <TouchableOpacity onPress={() => navigation.navigate('EventDetail', item)}>
             <View style={styles.itemBlock}>
@@ -63,17 +67,57 @@ export default function Event({navigation}) {
         setEventsList(events);
     }
     const onChangeStartDate = (event, selectedDate) => {
+        if (event.type == "dismissed") {
+            setShowStartDate(false);
+            return;
+        }
+        setShowStartDate(false);
         setStartDate(selectedDate);
 
         // set events list
     };
     const onChangeEndDate = (event, selectedDate) => {
+        if (event.type == "dismissed") {
+            setShowEndDate(false);
+            return;
+        }
+        setShowEndDate(false);
         setEndDate(selectedDate);
 
         // set events list
     };
+    const onCancelStartDate = () => {
+        console.log("cancel start date:");
+        setShowStartDate(false);
+    }
+    const onCancelEndDate = () => {
+        console.log("cancel end date:");
+        setShowEndDate(false);
+    }
     const handleResetEventsList = () => {
+        setStartDate(new Date());
+        setEndDate(new Date());
+        mapperEvents(originalData)
+    }
+    const handleSearchEventsList = () => {
+        let startDateObject = Date.parse(convertDate(startDate));
+        let endDateObject = Date.parse(convertDate(endDate));
 
+        // set events list
+        let currentEventsList = eventsList;
+        currentEventsList = currentEventsList.filter((event, index) => {
+            let date = event.created_at.substring(0, event.created_at.indexOf(','));
+            let dateSplit = date.split('/');
+            let mm = dateSplit[0].length == 1 ? '0' + dateSplit[0] : dateSplit[0];
+            let dd = dateSplit[1].length == 1 ? '0' + dateSplit[1] : dateSplit[1];
+            let yyyy = dateSplit[2];
+            let eventDate = yyyy + '-' + mm + '-' + dd;
+            let eventDateObject = Date.parse(eventDate);
+            if (startDateObject <= eventDateObject && eventDateObject <= endDateObject) {
+                return event;
+            }
+        })
+        setEventsList(currentEventsList);
     }
 
 
@@ -91,26 +135,50 @@ export default function Event({navigation}) {
 
             <View style={{display: 'flex', flexDirection: 'row'}}>
                 <Text style={{width: 120, height: 50, backgroundColor: 'red', paddingTop: 15}}>Ngày bắt đầu: </Text>
-                <DateTimePicker
+                <TextInput
+                    style={{marginLeft: 10, width: 150}}
+                    disabled={true}
+                    right={<TextInput.Icon name='password' onPress={() => {
+                        setShowStartDate(true)
+                    }}/>}
+                    value={startDate.getDate() + "/" + (parseInt(startDate.getMonth()) + 1).toString() + "/" + startDate.getFullYear()}
+                />
+                {showStartDate && <DateTimePicker
                     testID="dateTimePicker"
                     value={startDate}
                     mode='date'
                     is24Hour={true}
                     onChange={onChangeStartDate}
-                />
+                    onTouchCancel={onCancelStartDate}
+                />}
             </View>
+
+
 
             <View style={{display: 'flex', flexDirection: 'row'}}>
                 <Text style={{width: 120, height: 50, backgroundColor: 'yellow', paddingTop: 15}}>Ngày kết thúc: </Text>
-                <DateTimePicker
+                <TextInput
+                    style={{marginLeft: 10, width: 150}}
+                    disabled={true}
+                    right={<TextInput.Icon name='password' onPress={() => {
+                        setShowEndDate(true)
+                    }}/>}
+                    value={endDate.getDate() + "/" + (parseInt(endDate.getMonth()) + 1).toString() + "/" + endDate.getFullYear()}
+                />
+                {showEndDate && <DateTimePicker
                     testID="dateTimePicker"
                     value={endDate}
                     mode='date'
                     is24Hour={true}
                     onChange={onChangeEndDate}
-                />
+                    onTouchCancel={onCancelEndDate}
+                />}
+
             </View>
 
+            <View>
+                <Button title='Tìm kiếm' onPress={handleSearchEventsList}/>
+            </View>
             <View>
                 <Button title='Reset' onPress={handleResetEventsList}/>
             </View>

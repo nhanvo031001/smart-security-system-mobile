@@ -4,7 +4,7 @@ import {RadioButton} from 'react-native-paper';
 import {useEffect, useState} from "react";
 
 export default function EventDetail({navigation, route}) {
-
+    console.log("route params: ", route.params)
     const [eventDetailInfoOriginal, setEventDetailInfoOriginal] = useState({});
     const [eventDetailInfo, setEventDetailInfo] = useState({});
     const [trueAlarmRadio, setTrueAlarmRadio] = useState();
@@ -50,7 +50,7 @@ export default function EventDetail({navigation, route}) {
 
                 <View style={styles.eventDetailBlock}>
                     <Text style={styles.eventDetailLeft}>Vị trí:</Text>
-                    <Text style={styles.eventDetailRight}>{eventDetailInfo.address}</Text>
+                    <Text style={styles.eventDetailRight}>{eventDetailInfo['address']}</Text>
                 </View>
 
                 <View style={styles.eventDetailBlock}>
