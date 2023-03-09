@@ -7,6 +7,7 @@ import ConfigurationIOTList from "../ConfigurationIOTList";
 import ConfigurationUserList from "../ConfigurationUserList";
 import dataCameraDevicesConfig from '../../utils/dummyData/managementCameraDeviceConfig.json';
 import dataIOTDevicesConfig from '../../utils/dummyData/managementIOTDeviceConfig.json';
+import {styles} from "./styles";
 
 
 export default function Configuration({navigation}) {
@@ -43,17 +44,13 @@ export default function Configuration({navigation}) {
     useEffect(() => {
         setCameraConfigList(dataCameraDevicesConfig);
         setIotConfigList(dataIOTDevicesConfig);
-    }, [selectedMenu])
+        setSelectedMenu('camera');
+    }, [])
 
 
     return (
         <Provider>
-            <View
-                style={{
-                    paddingTop: 0,
-                    flexDirection: 'row',
-                    justifyContent: 'flex-end',
-                }}>
+            <View style={styles.menuContainer}>
                 <Menu
                     visible={visible}
                     onDismiss={closeMenu}
@@ -65,7 +62,7 @@ export default function Configuration({navigation}) {
             </View>
 
 
-            {selectedMenu == 'camera' ? <ConfigurationCameraList navigation={navigation} camerasList={cameraConfigList} /> : ''}
+            {selectedMenu == 'camera' ? <ConfigurationCameraList navigation={navigation} camerasList={cameraConfigList}/> : ''}
             {selectedMenu == 'iot' ? <ConfigurationIOTList navigation={navigation} iotList={iotConfigList}/> : ''}
             {selectedMenu == 'user' ? <ConfigurationUserList/> : ''}
 
