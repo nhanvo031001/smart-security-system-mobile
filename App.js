@@ -10,6 +10,7 @@ import ConfigurationCameraDetail from "./components/ConfigurationCameraDetail";
 import ConfigurationIOTDetail from "./components/ConfigurationIOTDetail";
 import Monitor from "./components/Monitor";
 import Dashboard from "./components/Dashboard";
+import Report from "./components/Report";
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,7 @@ export default function App() {
                 <Stack.Screen name="ConfigurationIOTDetail" component={ConfigurationIOTDetail} options={{title: 'Chi tiết cảm biến'}}/>
                 <Stack.Screen name="Monitor" component={Monitor} options={{title: 'Giám sát'}}/>
                 <Stack.Screen name="Dashboard" component={Dashboard} options={{title: 'Tổng quát'}}/>
+                <Stack.Screen name="Report" component={Report} options={{title: 'Báo cáo'}}/>
             </Stack.Navigator>
         </NavigationContainer>
     );

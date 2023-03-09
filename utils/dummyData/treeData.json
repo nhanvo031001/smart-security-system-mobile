@@ -1,14 +1,4 @@
 [
-  {"id": 100, "floor_level": 1, "building_id": 10, "type": "floor", "lat": 10.762622, "lng": 106.660172, "url": "https://wpmedia.roomsketcher.com/content/uploads/2021/12/07133333/RoomSketcher-High-Quality-3D-Floor-Plans.jpg"},
-  {"id": 200, "floor_level": 2, "building_id": 10, "type": "floor", "lat": 10.772622, "lng": 106.670172, "url": "https://wpmedia.roomsketcher.com/content/uploads/2021/12/14154723/RoomSketcher-Home-Designer-Custom-3D-Floor-Plan.jpg"},
-  {"id": 300, "floor_level": 3, "building_id": 10, "type": "floor", "lat": 10.782622, "lng": 106.680172, "url": "https://www.livehome3d.com/assets/img/landing/floorplanner-app/floor-plans-from-scratch.png"},
-  {"id": 400, "floor_level": 4, "building_id": 10, "type": "floor", "lat": 10.792622, "lng": 106.690172, "url": "https://images.younghouselove.com/2013/05/Floor-Plan-1.jpg"},
-  {"id": 500, "floor_level": 1, "building_id": 20, "type": "floor", "lat": 10.732622, "lng": 106.640172, "url": "https://images.homify.com/c_fill,f_auto,q_0,w_740/v1539515545/p/photo/image/2748350/3d_floor_plan.jpg"},
-  {"id": 600, "floor_level": 2, "building_id": 20, "type": "floor", "lat": 10.712622, "lng": 106.630172, "url": "https://cdn.shopify.com/s/files/1/1142/1104/products/7092-First-Floor_M_1200x.jpg?v=1637289603"}
-]
-
-
-[
   {
     "label": "VP Accounting",
     "tagClassName": "special",
