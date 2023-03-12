@@ -2,13 +2,7 @@ import {Button, Text, TouchableOpacity, View} from "react-native";
 import '../../styles/appStyles'
 import {appStyles} from "../../styles/appStyles";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import MainTabScreen from "../MainTabScreen";
-import Dashboard from "../Dashboard";
-import Event from "../Event"
-import Ionicons from "react-native-vector-icons/Ionicons";
-import Configuration from "../Configuration";
 import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
-import Report from "../Report";
 import {CommonActions} from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator();

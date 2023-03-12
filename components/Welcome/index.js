@@ -10,6 +10,7 @@ import Configuration from "../Configuration";
 import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
 import Report from "../Report";
 import Personal from "../Personal";
+import Notifications from "../Notifications";
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -33,6 +34,8 @@ export default function Welcome ({navigation}) {
                         iconName = focused ? "person" : "person";
                     } else if (route.name === "Personal") {
                         iconName = focused ? "person-outline" : "person-outline";
+                    } else if (route.name === "Notifications") {
+                        iconName = focused ? "notifications" : "notifications";
                     }
                     return <Ionicons name={iconName} color={color} size={24} />
                 },
@@ -47,6 +50,7 @@ export default function Welcome ({navigation}) {
             <Tab.Screen name="Report" component={Report} options={{ title: "Report" }} />
             <Tab.Screen name="Profile" component={Report} options={{ title: "Profile" }} />
             <Tab.Screen name="Personal" component={Personal} options={{ title: "Personal" }} />
+            <Tab.Screen name="Notifications" component={Notifications} options={{ title: "Notifications" }} />
         </Tab.Navigator>
 
     );

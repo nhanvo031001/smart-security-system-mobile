@@ -15,6 +15,7 @@ import Login from "./components/Login";
 import LoginForgetPassword from "./components/LoginForgetPassword";
 import ApplicationStackScreen from "./components/ApplicationStackScreen";
 import Personal from "./components/Personal";
+import Notifications from "./components/Notifications";
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +42,7 @@ export default function App() {
                 <Stack.Screen name="Login" component={Login} options={{title: 'Trang đăng nhập'}}/>
                 <Stack.Screen name="LoginForgetPassword" component={LoginForgetPassword} options={{title: 'Quên mật khẩu'}}/>
                 <Stack.Screen name="Personal" component={Personal} options={{title: 'Cá nhân'}}/>
+                <Stack.Screen name="Notifications" component={Notifications} options={{title: 'Thông báo'}}/>
 
             </Stack.Navigator>
         </NavigationContainer>
