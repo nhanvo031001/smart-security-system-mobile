@@ -12,6 +12,7 @@ export default function Welcome ({navigation}) {
             <Button title='Go to Monitor' onPress={() => {navigation.navigate('Monitor')}} />
             <Button title='Go to Dashboard' onPress={() => {navigation.navigate('Dashboard')}} />
             <Button title='Go to Report' onPress={() => {navigation.navigate('Report')}} />
+            <Button title='Go to Login' onPress={() => {navigation.navigate('Login')}} />
         </View>
     );
 }

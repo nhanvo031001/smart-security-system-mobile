@@ -11,6 +11,8 @@ import ConfigurationIOTDetail from "./components/ConfigurationIOTDetail";
 import Monitor from "./components/Monitor";
 import Dashboard from "./components/Dashboard";
 import Report from "./components/Report";
+import Login from "./components/Login";
+import LoginForgetPassword from "./components/LoginForgetPassword";
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +36,8 @@ export default function App() {
                 <Stack.Screen name="Monitor" component={Monitor} options={{title: 'Giám sát'}}/>
                 <Stack.Screen name="Dashboard" component={Dashboard} options={{title: 'Tổng quát'}}/>
                 <Stack.Screen name="Report" component={Report} options={{title: 'Báo cáo'}}/>
+                <Stack.Screen name="Login" component={Login} options={{title: 'Trang đăng nhập'}}/>
+                <Stack.Screen name="LoginForgetPassword" component={LoginForgetPassword} options={{title: 'Quên mật khẩu'}}/>
             </Stack.Navigator>
         </NavigationContainer>
     );
