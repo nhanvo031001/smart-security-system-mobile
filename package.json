@@ -11,6 +11,7 @@
   "dependencies": {
     "@react-native-community/datetimepicker": "^6.7.5",
     "@react-native-menu/menu": "^0.7.3",
+    "@react-navigation/material-top-tabs": "^6.6.2",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
     "expo": "~48.0.4",
@@ -33,6 +34,7 @@
     "react-native-sass-transformer": "^2.0.0",
     "react-native-screens": "^3.20.0",
     "react-native-svg": "13.4.0",
+    "react-native-tab-view": "^3.5.1",
     "react-native-tree-select": "^2.0.9",
     "react-native-vector-icons": "^9.2.0",
     "react-navigation": "^4.4.4"

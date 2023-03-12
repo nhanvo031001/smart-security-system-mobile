@@ -4,6 +4,7 @@ import {appStyles} from "../../styles/appStyles";
 import logo from '../../assets/hcmut.png';
 import {useState} from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import {CommonActions } from '@react-navigation/native';
 
 const {screenWidth} = Dimensions.get("window").width;
 const {screenHeight} = Dimensions.get("window").height;
@@ -24,7 +25,27 @@ export default function Login({navigation}) {
         }
     }
     const handleLogin = () => {
-        navigation.navigate('Dashboard')
+        navigation.dispatch(state => {
+            return CommonActions.reset({
+                index: 0,
+                routes: [{
+                    name: 'Welcome',
+                    // state: {
+                    //     routes: [{
+                    //         name: 'MainTabScreen',
+                    //         state: {
+                    //             routes: [{
+                    //                 name: 'Dashboard',
+                    //                 params: {}
+                    //             }]
+                    //         }
+                    //     }]
+                    // }
+
+                }]
+            })
+        })
+        // navigation.navigate('Welcome')
     }
 
     return (
@@ -125,16 +146,12 @@ export default function Login({navigation}) {
 
                 <TouchableOpacity style={{
                     width: '90%',
-                    // height: 50,
                     alignItems: 'center',
                     justifyContent: 'center',
                     display: 'flex',
                     backgroundColor: 'red'
                 }}
-                    onPress={() => {
-                        console.log("press login")
-                        navigation.navigate('Dashboard')
-                    }}
+                    onPress={handleLogin}
                 >
 
 

@@ -13,6 +13,7 @@ import Dashboard from "./components/Dashboard";
 import Report from "./components/Report";
 import Login from "./components/Login";
 import LoginForgetPassword from "./components/LoginForgetPassword";
+import ApplicationStackScreen from "./components/ApplicationStackScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,12 +23,12 @@ export default function App() {
 
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName='StartScreen'
+                initialRouteName='Login'
                 screenOptions={({route, navigation}) => ({
                     headerTitleAlign: 'center',
                 })}
             >
-                <Stack.Screen name="Welcome" component={Welcome} options={{title: 'Đăng nhập'}}/>
+                <Stack.Screen name="Welcome" component={Welcome} options={{title: 'Smart Security System'}}/>
                 <Stack.Screen name="Event" component={Event} options={{title: 'Sự kiện'}}/>
                 <Stack.Screen name="EventDetail" component={EventDetail} options={{title: 'Chi tiết sự kiện'}}/>
                 <Stack.Screen name="Configuration" component={Configuration} options={{title: 'Cấu hình'}}/>
@@ -38,6 +39,9 @@ export default function App() {
                 <Stack.Screen name="Report" component={Report} options={{title: 'Báo cáo'}}/>
                 <Stack.Screen name="Login" component={Login} options={{title: 'Trang đăng nhập'}}/>
                 <Stack.Screen name="LoginForgetPassword" component={LoginForgetPassword} options={{title: 'Quên mật khẩu'}}/>
+                <Stack.Group screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="ApplicationStackScreen" component={ApplicationStackScreen} />
+                </Stack.Group>
             </Stack.Navigator>
         </NavigationContainer>
     );

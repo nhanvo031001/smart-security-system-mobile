@@ -136,7 +136,7 @@ export default function Event({navigation}) {
             <View style={{display: 'flex', flexDirection: 'row'}}>
                 <Text style={{width: 120, height: 50, backgroundColor: 'red', paddingTop: 15}}>Ngày bắt đầu: </Text>
                 <TextInput
-                    style={{marginLeft: 10, width: 150}}
+                    style={{marginLeft: 10, width: 170}}
                     disabled={true}
                     right={<TextInput.Icon name='password' onPress={() => {
                         setShowStartDate(true)
@@ -158,7 +158,7 @@ export default function Event({navigation}) {
             <View style={{display: 'flex', flexDirection: 'row'}}>
                 <Text style={{width: 120, height: 50, backgroundColor: 'yellow', paddingTop: 15}}>Ngày kết thúc: </Text>
                 <TextInput
-                    style={{marginLeft: 10, width: 150}}
+                    style={{marginLeft: 10, width: 170}}
                     disabled={true}
                     right={<TextInput.Icon name='password' onPress={() => {
                         setShowEndDate(true)
