@@ -14,6 +14,7 @@ import Report from "./components/Report";
 import Login from "./components/Login";
 import LoginForgetPassword from "./components/LoginForgetPassword";
 import ApplicationStackScreen from "./components/ApplicationStackScreen";
+import Personal from "./components/Personal";
 
 const Stack = createNativeStackNavigator();
 
@@ -39,9 +40,8 @@ export default function App() {
                 <Stack.Screen name="Report" component={Report} options={{title: 'Báo cáo'}}/>
                 <Stack.Screen name="Login" component={Login} options={{title: 'Trang đăng nhập'}}/>
                 <Stack.Screen name="LoginForgetPassword" component={LoginForgetPassword} options={{title: 'Quên mật khẩu'}}/>
-                <Stack.Group screenOptions={{ headerShown: false }}>
-                    <Stack.Screen name="ApplicationStackScreen" component={ApplicationStackScreen} />
-                </Stack.Group>
+                <Stack.Screen name="Personal" component={Personal} options={{title: 'Cá nhân'}}/>
+
             </Stack.Navigator>
         </NavigationContainer>
     );
