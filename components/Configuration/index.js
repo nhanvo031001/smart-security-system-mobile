@@ -57,7 +57,7 @@ export default function Configuration({navigation}) {
                     anchor={<Button onPress={openMenu}>Chọn cấu hình: {selectedMenuText}</Button>}>
                     <Menu.Item onPress={() => handleSelectMenu('camera')} title="Camera"/>
                     <Menu.Item onPress={() => handleSelectMenu('iot')} title="Thiết bị cảm biến"/>
-                    <Menu.Item onPress={() => handleSelectMenu('user')} title="Người dùng"/>
+                    {/*<Menu.Item onPress={() => handleSelectMenu('user')} title="Người dùng"/>*/}
                 </Menu>
             </View>
 

@@ -1,4 +1,4 @@
-import {Button, Text, View, FlatList, TouchableOpacity, ScrollView} from "react-native";
+import {Button, Text, View, FlatList, TouchableOpacity, ScrollView, Platform} from "react-native";
 import dataEvents from '../../utils/dummyData/eventList.json';
 import dataIOTDevicesConfig from '../../utils/dummyData/managementIOTDeviceConfig.json';
 import iotDevices from '../../utils/dummyData/managementCameraDevice.json';
@@ -16,9 +16,11 @@ export default function Event({navigation}) {
     const [configurationIOTsList, setConfigurationIOTsList] = useState([]);
     const [devicesList, setDevicesList] = useState([]);
     const [startDate, setStartDate] = useState(new Date());
-    const [showStartDate, setShowStartDate] = useState(false);
+    // const [showStartDate, setShowStartDate] = useState(false);
+    const [showStartDate, setShowStartDate] = useState(Platform.OS == 'ios' ? true : false);
     const [endDate, setEndDate] = useState(new Date());
-    const [showEndDate, setShowEndDate] = useState(false);
+    // const [showEndDate, setShowEndDate] = useState(false);
+    const [showEndDate, setShowEndDate] = useState(Platform.OS == 'ios' ? true : false);
     const FlatListItem = (item, index) => {
         return <TouchableOpacity onPress={() => navigation.navigate('EventDetail', item)}>
             <View style={styles.itemBlock}>
@@ -37,7 +39,7 @@ export default function Event({navigation}) {
             </View>
         )
     }
-    const mapperEvents = (events) => {
+    const mapperEvents = (events, mapperForOriginalData) => {
         events = events.map((ele, key) => {
             let zone = ele['zone'];
 
@@ -63,60 +65,75 @@ export default function Event({navigation}) {
             return {...ele, event_name, device_name, address, created_at, zone: zone, key: zone}
         })
 
-
-        setEventsList(events);
+        if (mapperForOriginalData == false) {
+            setEventsList(events);
+        } else {
+            setOriginalData(events);
+        }
     }
     const onChangeStartDate = (event, selectedDate) => {
         if (event.type == "dismissed") {
-            setShowStartDate(false);
+            // setShowStartDate(false);
+            Platform.OS == 'ios' ? setShowStartDate(true) : setShowStartDate(false);
             return;
         }
-        setShowStartDate(false);
+        // setShowStartDate(false);
+        Platform.OS == 'ios' ? setShowStartDate(true) : setShowStartDate(false);
         setStartDate(selectedDate);
 
         // set events list
     };
     const onChangeEndDate = (event, selectedDate) => {
         if (event.type == "dismissed") {
-            setShowEndDate(false);
+            // setShowEndDate(false);
+            Platform.OS == 'ios' ? setShowEndDate(true) : setShowEndDate(false);
             return;
         }
-        setShowEndDate(false);
+        // setShowEndDate(false);
+        Platform.OS == 'ios' ? setShowEndDate(true) : setShowEndDate(false);
         setEndDate(selectedDate);
 
         // set events list
     };
     const onCancelStartDate = () => {
         console.log("cancel start date:");
-        setShowStartDate(false);
+        // setShowStartDate(false);
+        Platform.OS == 'ios' ? setShowStartDate(true) : setShowStartDate(false);
     }
     const onCancelEndDate = () => {
         console.log("cancel end date:");
-        setShowEndDate(false);
+        // setShowEndDate(false);
+        Platform.OS == 'ios' ? setShowEndDate(true) : setShowEndDate(false);
     }
     const handleResetEventsList = () => {
         setStartDate(new Date());
         setEndDate(new Date());
-        mapperEvents(originalData)
+        setEventsList(originalData);
+        // mapperEvents(originalData)
     }
     const handleSearchEventsList = () => {
+        console.log(convertDate(startDate))
+        console.log(convertDate(endDate))
         let startDateObject = Date.parse(convertDate(startDate));
         let endDateObject = Date.parse(convertDate(endDate));
 
         // set events list
-        let currentEventsList = eventsList;
+        // let currentEventsList = eventsList;
+        let currentEventsList = originalData;
         currentEventsList = currentEventsList.filter((event, index) => {
             let date = event.created_at.substring(0, event.created_at.indexOf(','));
             let dateSplit = date.split('/');
-            let mm = dateSplit[0].length == 1 ? '0' + dateSplit[0] : dateSplit[0];
-            let dd = dateSplit[1].length == 1 ? '0' + dateSplit[1] : dateSplit[1];
+            let dd = Platform.OS == 'ios' ? (dateSplit[0].length == 1 ? '0' + dateSplit[0] : dateSplit[0]) : (dateSplit[1].length == 1 ? '0' + dateSplit[1] : dateSplit[1]);
+            let mm = Platform.OS == 'ios' ? (dateSplit[1].length == 1 ? '0' + dateSplit[1] : dateSplit[1]) : (dateSplit[0].length == 1 ? '0' + dateSplit[0] : dateSplit[0]);
             let yyyy = dateSplit[2];
             let eventDate = yyyy + '-' + mm + '-' + dd;
+            console.log(event["zone"], eventDate)
             let eventDateObject = Date.parse(eventDate);
             if (startDateObject <= eventDateObject && eventDateObject <= endDateObject) {
                 return event;
             }
         })
+        // console.log("filtering date event: ", currentEventsList);
         setEventsList(currentEventsList);
     }
 
@@ -126,24 +143,40 @@ export default function Event({navigation}) {
         setConfigurationIOTsList(dataIOTDevicesConfig);
         let dataDevices = iotDevices.concat(cameraDevices);
         setDevicesList(dataDevices);
-        mapperEvents(dataEvents)
+        mapperEvents(dataEvents, false)
+        mapperEvents(dataEvents, true)
     }, []);
 
 
     return (
-        <View>
+        <View style={styles.eventContainer}>
 
-            <View style={{display: 'flex', flexDirection: 'row'}}>
-                <Text style={{width: 120, height: 50, backgroundColor: 'red', paddingTop: 15}}>Ngày bắt đầu: </Text>
-                <TextInput
-                    style={{marginLeft: 10, width: 170}}
-                    disabled={true}
-                    right={<TextInput.Icon name='password' onPress={() => {
-                        setShowStartDate(true)
-                    }}/>}
-                    value={startDate.getDate() + "/" + (parseInt(startDate.getMonth()) + 1).toString() + "/" + startDate.getFullYear()}
-                />
+            <View style={styles.startDateContainer}>
+                <Text style={styles.startDate}>Ngày bắt đầu: </Text>
+                {/*<TextInput*/}
+                {/*    style={{marginLeft: 10, width: 160, backgroundColor: "green"}}*/}
+                {/*    disabled={true}*/}
+                {/*    right={<TextInput.Icon style={{width: 40}} name='password' onPress={() => {*/}
+                {/*        setShowStartDate(true)*/}
+                {/*    }}/>}*/}
+                {/*    value={startDate.getDate() + "/" + (parseInt(startDate.getMonth()) + 1).toString() + "/" + startDate.getFullYear()}*/}
+                {/*/>*/}
+
+                {Platform.OS == 'ios' ?
+                    ''
+                    :
+                    <TextInput
+                        style={styles.startDateInput}
+                        disabled={true}
+                        right={<TextInput.Icon style={{width: 40}} name='password' onPress={() => {
+                            setShowStartDate(true)
+                        }}/>}
+                        value={startDate.getDate() + "/" + (parseInt(startDate.getMonth()) + 1).toString() + "/" + startDate.getFullYear()}
+                    />
+                }
+
                 {showStartDate && <DateTimePicker
+                    style={styles.startDateLib}
                     testID="dateTimePicker"
                     value={startDate}
                     mode='date'
@@ -154,18 +187,34 @@ export default function Event({navigation}) {
             </View>
 
 
+            <View style={styles.endDateContainer}>
+                <Text style={styles.endDate}>Ngày kết thúc: </Text>
+                {/*<TextInput*/}
+                {/*    style={{marginLeft: 10, width: 170}}*/}
+                {/*    disabled={true}*/}
+                {/*    right={<TextInput.Icon name='password' onPress={() => {*/}
+                {/*        setShowEndDate(true)*/}
+                {/*    }}/>}*/}
+                {/*    value={endDate.getDate() + "/" + (parseInt(endDate.getMonth()) + 1).toString() + "/" + endDate.getFullYear()}*/}
+                {/*/>*/}
 
-            <View style={{display: 'flex', flexDirection: 'row'}}>
-                <Text style={{width: 120, height: 50, backgroundColor: 'yellow', paddingTop: 15}}>Ngày kết thúc: </Text>
-                <TextInput
-                    style={{marginLeft: 10, width: 170}}
-                    disabled={true}
-                    right={<TextInput.Icon name='password' onPress={() => {
-                        setShowEndDate(true)
-                    }}/>}
-                    value={endDate.getDate() + "/" + (parseInt(endDate.getMonth()) + 1).toString() + "/" + endDate.getFullYear()}
-                />
+
+                {Platform.OS == 'ios' ?
+                    ''
+                    :
+                    <TextInput
+                        style={styles.endDateInput}
+                        disabled={true}
+                        right={<TextInput.Icon name='password' onPress={() => {
+                            setShowEndDate(true)
+                        }}/>}
+                        value={endDate.getDate() + "/" + (parseInt(endDate.getMonth()) + 1).toString() + "/" + endDate.getFullYear()}
+                    />
+                }
+
+
                 {showEndDate && <DateTimePicker
+                    style={styles.endDateLib}
                     testID="dateTimePicker"
                     value={endDate}
                     mode='date'

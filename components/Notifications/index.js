@@ -1,24 +1,44 @@
-import {Button, Text, TouchableOpacity, View} from "react-native";
-import '../../styles/appStyles'
-import {appStyles} from "../../styles/appStyles";
-import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
-import {CommonActions} from "@react-navigation/native";
-
-const Stack = createNativeStackNavigator();
-const Tab = createMaterialTopTabNavigator();
+import {Dimensions, FlatList, Text, View} from "react-native";
+import '../../styles/appStyles';
+import dataNotifications from "../../utils/dummyData/notifications.json";
+import {useEffect, useState} from "react";
+import {styles} from "./styles";
 
 export default function Notifications({navigation}) {
 
+    const [notificationsList, setNotificationsList] = useState([]);
+    const FlatListItem = (item, index) => {
+        return <View style={styles.eachNotificationBlock}>
+            <Text style={styles.notificationName}>{item.event_name}</Text>
+
+            <Text>
+                Thời gian: {item.created_at}
+            </Text>
+
+            <Text>
+                Vị trí: {item.address}
+            </Text>
+        </View>
+    }
+
+
+    useEffect(() => {
+        setNotificationsList(dataNotifications);
+    }, [])
+
 
     return (
-        <View style={{
-            flex: 1,
-            alignItems: "center",
-            height: '100%',
-            width: '100%'
-        }}>
+        <View style={styles.notificationContainer}>
             <Text>notifications</Text>
+            <FlatList
+                style={styles.notificationFlatList}
+                data={notificationsList}
+                renderItem={({item, index}) => {
+                    return (FlatListItem(item, index));
+                }}
+                keyExtractor={(item, index) => index.toString()}
+            >
+            </FlatList>
         </View>
 
     );

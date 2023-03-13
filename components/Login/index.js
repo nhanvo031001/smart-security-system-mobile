@@ -4,7 +4,8 @@ import {appStyles} from "../../styles/appStyles";
 import logo from '../../assets/hcmut.png';
 import {useState} from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import {CommonActions } from '@react-navigation/native';
+import {CommonActions} from '@react-navigation/native';
+import {styles} from "./styles";
 
 const {screenWidth} = Dimensions.get("window").width;
 const {screenHeight} = Dimensions.get("window").height;
@@ -50,48 +51,16 @@ export default function Login({navigation}) {
 
     return (
         <View style={appStyles.appContainer}>
-            <View style={{
-                flex: 1,
-                backgroundColor: "red",
-                alignItems: "center",
-                justifyContent: "center",
-                marginTop: 260,
-                height: '100%',
-                width: '100%'
-            }}>
-                <Image source={logo} style={{
-                    width: 150,
-                    height: 150,
-                    marginBottom: 20
-                }}/>
+            <View style={styles.loginContainer}>
+                <Image source={logo} style={styles.logo}/>
 
-                <View style={{
-                    width: '80%',
-                    height: 90,
-                    // backgroundColor: 'red',
-                    alignItems: 'center'
-                }}>
-                    <Text style={{
-                        fontWeight: 'bold',
-                        fontSize: 40
-                    }}>Welcome back.</Text>
+                <View style={styles.titleContainer}>
+                    <Text style={styles.titleText}>Welcome back.</Text>
                 </View>
 
-                <View style={{
-                    backgroundColor: "yellow",
-                    borderRadius: 10,
-                    width: "90%",
-                    height: 45,
-                    marginBottom: 20,
-                    // alignItems: "center",
-                }}>
+                <View style={styles.usernameContainer}>
                     <TextInput
-                        style={{
-                            // height: 50,
-                            flex: 1,
-                            padding: 10,
-                            marginLeft: 15,
-                        }}
+                        style={styles.userNameInput}
                         placeholder="Tên tài khoản"
                         placeholderTextColor="#003f5c"
                         onChangeText={(email) => setPassword(email)}
@@ -101,73 +70,35 @@ export default function Login({navigation}) {
                 </View>
 
 
-                <View style={{
-                    backgroundColor: "yellow",
-                    borderRadius: 10,
-                    width: "90%",
-                    height: 45,
-                    marginBottom: 20,
-                    flexDirection: 'row'
-                }}>
+                <View style={styles.passwordContainer}>
                     <TextInput
-                        style={{
-                            // height: 50,
-                            flex: 1,
-                            padding: 10,
-                            marginLeft: 15,
-                        }}
+                        style={styles.passwordText}
                         placeholder="Mật khẩu"
                         placeholderTextColor="#003f5c"
                         secureTextEntry={secureTextEntry}
                         onChangeText={(password) => setPassword(password)}
                     />
 
-                    <MaterialCommunityIcons style={{
-                        paddingTop: 10,
-                        paddingRight: 10
-                    }} name={rightIcon} size={22} color="#232323"
+                    <MaterialCommunityIcons style={styles.displayPasswordIcon} name={rightIcon} size={22}
+                                            color="#232323"
                                             onPress={handleIconPassword}
                     />
                 </View>
 
-                <TouchableOpacity style={{
-                    marginBottom: 50,
-                    width: '90%',
-                    height: 30,
-                    alignItems: 'flex-end',
-                }}
-                                  onPress={() => {navigation.navigate('LoginForgetPassword')}}
+                <TouchableOpacity style={styles.forgetPasswordContainer}
+                                  onPress={() => {
+                                      navigation.navigate('LoginForgetPassword')
+                                  }}
                 >
-                    <Text style={{
-                        height: 30,
-                        // marginBottom: 50,
-                    }}>Quên mật khẩu?</Text>
+                    <Text style={styles.forgetPasswordText}>Quên mật khẩu?</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={{
-                    width: '90%',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    display: 'flex',
-                    backgroundColor: 'red'
-                }}
-                    onPress={handleLogin}
+                <TouchableOpacity style={styles.loginButton}
+                                  onPress={handleLogin}
                 >
 
-
-                    <View style={{
-                        width: '40%',
-                        height: 50,
-                        backgroundColor: 'blue',
-                        alignItems: 'center',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        // marginTop: 100,
-                        borderRadius: 10
-                    }}>
-                        <Text style={{
-                            fontWeight: "bold"
-                        }}>
+                    <View style={styles.loginView}>
+                        <Text style={styles.loginText}>
                             Đăng nhập
                         </Text>
                     </View>

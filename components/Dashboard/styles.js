@@ -5,19 +5,23 @@ export const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-around',
-        backgroundColor: 'yellow'
+        // backgroundColor: 'yellow',
     },
 
     eachBlock: {
-        width: 130,
+        width: 125,
         height: 100,
-        backgroundColor: 'red',
+        // backgroundColor: 'red',
+        backgroundColor: '#D0D5DD',
+        borderRadius: 10,
     },
 
     eachBlockEvent: {
         width: 130,
         height: 100,
-        backgroundColor: 'green',
+        // backgroundColor: 'green',
+        backgroundColor: '#D0D5DD',
+        borderRadius: 10,
         flexShrink: 1
     },
 
@@ -43,27 +47,67 @@ export const styles = StyleSheet.create({
     },
 
     pieChartContainer: {
-        backgroundColor: 'blue',
+        // backgroundColor: 'blue',
+        backgroundColor: '#D0D5DD',
+        borderRadius: 10,
         marginTop: 10,
     },
 
     recentEventsContainer: {
-        backgroundColor: 'purple',
+        // backgroundColor: 'purple',
+        backgroundColor: '#D0D5DD',
         marginTop: 20,
         display: 'flex',
         flexDirection: 'column'
     },
 
     recentEventBlock: {
-        backgroundColor: 'grey',
+        // backgroundColor: 'grey',
         margin: 10,
         display: 'flex',
         flexDirection: 'row'
     },
 
     recentEventInfoRight: {
-        backgroundColor: 'red',
-        width: '60%'
+        // backgroundColor: 'red',
+        backgroundColor: '#E4E7EC',
+        borderRadius: 10,
+        width: '60%',
+        paddingLeft: 5
+    },
+
+    recentEventText: {
+        color: '#0B4A6F',
+        fontWeight: "bold",
+        fontSize: 20,
+        paddingLeft: 10,
+        paddingTop: 10,
+    },
+
+    eventName: {
+        fontWeight: "bold",
+        fontSize: 16,
+        marginBottom: 10
+    },
+
+    eventZone: {
+
+    },
+
+    eventTime: {
+        backgroundColor: "#CCE0FF",
+        width: 200,
+        borderColor: "#7875FF",
+        borderRadius: 3,
+        borderWidth: 2,
+    },
+
+    eventAddress: {
+
+    },
+
+    eventDevice: {
+
     },
 
     chartConfig: {

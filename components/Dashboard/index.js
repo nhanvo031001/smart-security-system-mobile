@@ -97,7 +97,7 @@ export default function Dashboard({navigation}) {
 
 
             <View style={styles.recentEventsContainer}>
-                <Text>Sự kiện gần đây</Text>
+                <Text style={styles.recentEventText}>Sự kiện gần đây</Text>
 
                 {recentEvents && recentEvents.map((event, index) => {
                     let url = event.video_url;
@@ -112,11 +112,11 @@ export default function Dashboard({navigation}) {
                                 />
                             </View>
                             <View style={styles.recentEventInfoRight}>
-                                <Text>{event.event_name}</Text>
-                                <Text>Zone: {event['zone']}</Text>
-                                <Text>{event.created_at}</Text>
-                                <Text>Vị trí: {event.address}</Text>
-                                <Text>Phát hiện bởi: {event.device_name}</Text>
+                                <Text style={styles.eventName}>{event.event_name}</Text>
+                                <Text style={styles.eventZone}>Zone: {event['zone']}</Text>
+                                <Text style={styles.eventTime}>{event.created_at}</Text>
+                                <Text style={styles.eventAddress}>Vị trí: {event.address}</Text>
+                                <Text style={styles.eventDevice}>Phát hiện bởi: {event.device_name}</Text>
                             </View>
                         </View>
 
@@ -135,15 +135,17 @@ const data = [
     {
         name: "Camera",
         population: 4,
-        color: "yellow",
-        legendFontColor: "#7F7F7F",
+        color: "#0BA5EC",
+        // legendFontColor: "#7F7F7F",
+        legendFontColor: "#0BA5EC",
         legendFontSize: 15
     },
     {
         name: "Cảm biến",
         population: 3,
-        color: "red",
-        legendFontColor: "#7F7F7F",
+        color: "#F63D68",
+        // legendFontColor: "#7F7F7F",
+        legendFontColor: "#F63D68",
         legendFontSize: 15
     },
 ];

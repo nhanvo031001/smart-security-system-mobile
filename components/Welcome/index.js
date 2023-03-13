@@ -25,7 +25,8 @@ export default function Welcome ({navigation}) {
                     if (route.name === "Dashboard") {
                         iconName = focused ? "speedometer" : "speedometer";
                     } else if (route.name === "Event") {
-                        iconName = focused ? "videocam" : "videocam";
+                        // iconName = focused ? "videocam" : "videocam";
+                        iconName = focused ? "radio" : "radio";
                     } else if (route.name === "Configuration") {
                         iconName = focused ? "construct" : "construct";
                     } else if (route.name === "Report") {
@@ -48,9 +49,9 @@ export default function Welcome ({navigation}) {
             <Tab.Screen name="Event" component={Event} options={{ title: "Event" }} />
             <Tab.Screen name="Configuration" component={Configuration} options={{ title: "Configuration" }} />
             <Tab.Screen name="Report" component={Report} options={{ title: "Report" }} />
-            <Tab.Screen name="Profile" component={Report} options={{ title: "Profile" }} />
-            <Tab.Screen name="Personal" component={Personal} options={{ title: "Personal" }} />
+            {/*<Tab.Screen name="Profile" component={Report} options={{ title: "Profile" }} />*/}
             <Tab.Screen name="Notifications" component={Notifications} options={{ title: "Notifications" }} />
+            <Tab.Screen name="Personal" component={Personal} options={{ title: "Personal" }} />
         </Tab.Navigator>
 
     );

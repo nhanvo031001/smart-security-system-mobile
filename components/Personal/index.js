@@ -1,12 +1,7 @@
-import {Button, Text, TouchableOpacity, View} from "react-native";
-import '../../styles/appStyles'
-import {appStyles} from "../../styles/appStyles";
-import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
+import {Text, TouchableOpacity, View} from "react-native";
+import '../../styles/appStyles';
+import {styles} from "./styles";
 import {CommonActions} from "@react-navigation/native";
-
-const Stack = createNativeStackNavigator();
-const Tab = createMaterialTopTabNavigator();
 
 export default function Personal({navigation}) {
 
@@ -21,34 +16,13 @@ export default function Personal({navigation}) {
 
 
     return (
-        <View style={{
-            flex: 1,
-            // backgroundColor: "red",
-            alignItems: "center",
-            // justifyContent: "center",
-            height: '100%',
-            width: '100%'
-        }}>
+        <View style={styles.personalContainer}>
             <Text>Personal</Text>
-            <TouchableOpacity style={{
-                width: '90%',
-                alignItems: 'center',
-                justifyContent: 'center',
-                display: 'flex',
-                backgroundColor: 'red'
-            }}
-                onPress={handleLogout}
+            <TouchableOpacity style={styles.buttonLogout}
+                              onPress={handleLogout}
             >
-                <View style={{
-                    width: '40%',
-                    height: 50,
-                    backgroundColor: 'blue',
-                    alignItems: 'center',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    borderRadius: 10
-                }}>
-                    <Text>Đăng xuất</Text>
+                <View style={styles.logoutView}>
+                    <Text style={styles.logoutText}>Đăng xuất</Text>
                 </View>
             </TouchableOpacity>
         </View>

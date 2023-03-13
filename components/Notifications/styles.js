@@ -1,0 +1,29 @@
+import {Dimensions, StyleSheet} from "react-native";
+
+const screenWidth = Dimensions.get("window").width;
+
+export const styles = StyleSheet.create({
+    eachNotificationBlock: {
+        width: screenWidth,
+        height: 70,
+        backgroundColor: 'yellow',
+        borderBottomWidth: 1,
+        borderBottomColor: "red"
+    },
+
+    notificationName: {
+        fontWeight: "bold",
+        fontSize: 18
+    },
+
+    notificationContainer: {
+        flex: 1,
+        alignItems: "center",
+        height: '100%',
+        width: '100%'
+    },
+
+    notificationFlatList: {
+        height: '100%'
+    }
+});
