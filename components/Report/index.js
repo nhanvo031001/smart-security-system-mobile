@@ -7,8 +7,7 @@ import {styles} from "./styles"
 export default function Report({navigation}) {
 
     return (
-        <View style={appStyles.appContainer}>
-            <Text>report</Text>
+        <View style={[appStyles.appContainer, {marginLeft: 10, marginRight: 10, marginTop: 10,}]}>
 
             <View style={styles.allEventsAndProcessedEvents}>
                 <View style={styles.allEvents}>
@@ -21,7 +20,6 @@ export default function Report({navigation}) {
                     <Text style={styles.processedEventsNumber}>1010121</Text>
                 </View>
             </View>
-
 
 
             <View style={styles.trueAndFalseAlarm}>

@@ -49,12 +49,13 @@ export default function Configuration({navigation}) {
 
 
     return (
-        <Provider>
-            <View style={styles.menuContainer}>
+        <Provider style={{}}>
+            <View style={[styles.menuContainer]}>
                 <Menu
                     visible={visible}
                     onDismiss={closeMenu}
                     anchor={<Button onPress={openMenu}>Chọn cấu hình: {selectedMenuText}</Button>}>
+                    {/*anchorPosition='top'*/}
                     <Menu.Item onPress={() => handleSelectMenu('camera')} title="Camera"/>
                     <Menu.Item onPress={() => handleSelectMenu('iot')} title="Thiết bị cảm biến"/>
                     {/*<Menu.Item onPress={() => handleSelectMenu('user')} title="Người dùng"/>*/}

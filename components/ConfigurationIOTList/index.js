@@ -46,9 +46,7 @@ export default function ConfigurationIOTList ({navigation, iotList}) {
 
 
     return (
-        <View>
-            <Text>iot list</Text>
-
+        <View style={styles.iotListContainer}>
             <FlatList
                 style={styles.flatListStyle}
                 data={data}

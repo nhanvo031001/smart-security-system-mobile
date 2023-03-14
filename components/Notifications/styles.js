@@ -6,9 +6,9 @@ export const styles = StyleSheet.create({
     eachNotificationBlock: {
         width: screenWidth,
         height: 70,
-        backgroundColor: 'yellow',
+        // backgroundColor: 'yellow',
         borderBottomWidth: 1,
-        borderBottomColor: "red"
+        borderBottomColor: "white"
     },
 
     notificationName: {
@@ -20,7 +20,10 @@ export const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         height: '100%',
-        width: '100%'
+        // width: '100%',
+        marginLeft: 15,
+        marginRight: 15,
+        marginTop: 10,
     },
 
     notificationFlatList: {

@@ -6,13 +6,13 @@ export const styles = StyleSheet.create({
     allEventsAndProcessedEvents: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
 
     allEvents: {
         width: screenWidth / 2 - 20,
         height: 100,
-        backgroundColor: 'red',
+        backgroundColor: '#0B4A6F',
         borderRadius: 10
     },
 
@@ -20,6 +20,8 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         paddingLeft: 10,
+        color: "#DDDDDD",
+        paddingTop: 7,
     },
 
     allEventsNumber: {
@@ -28,13 +30,14 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         textAlign: 'center',
         marginTop: 10,
-        fontSize: 30
+        fontSize: 30,
+        color: "#DDDDDD",
     },
 
     processedEvents: {
         width: screenWidth / 2 - 20,
         height: 100,
-        backgroundColor: 'blue',
+        backgroundColor: '#4A1FB8',
         borderRadius: 10
     },
 
@@ -42,6 +45,8 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         paddingLeft: 10,
+        color: "#DDDDDD",
+        paddingTop: 7,
     },
 
     processedEventsNumber:{
@@ -51,6 +56,7 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         marginTop: 10,
         fontSize: 30,
+        color: "#DDDDDD",
     },
 
     trueAndFalseAlarm: {
@@ -63,7 +69,7 @@ export const styles = StyleSheet.create({
     trueAlarm: {
         width: screenWidth / 2 - 20,
         height: 100,
-        backgroundColor: 'yellow',
+        backgroundColor: '#8AC53E',
         borderRadius: 10
     },
 
@@ -71,6 +77,8 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         paddingLeft: 10,
+        color: "#DDDDDD",
+        paddingTop: 7,
     },
 
     trueAlarmNumber: {
@@ -79,13 +87,14 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         textAlign: 'center',
         marginTop: 10,
+        color: "#DDDDDD",
         fontSize: 30
     },
 
     falseAlarm: {
         width: screenWidth / 2 - 20,
         height: 100,
-        backgroundColor: 'grey',
+        backgroundColor: '#D92D20',
         borderRadius: 10
     },
 
@@ -93,6 +102,8 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         paddingLeft: 10,
+        color: "#DDDDDD",
+        paddingTop: 7,
     },
 
     falseAlarmNumber:{
@@ -102,6 +113,7 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         marginTop: 10,
         fontSize: 30,
+        color: "#DDDDDD",
     },
 
     

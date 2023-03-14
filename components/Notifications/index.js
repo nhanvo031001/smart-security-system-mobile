@@ -29,7 +29,6 @@ export default function Notifications({navigation}) {
 
     return (
         <View style={styles.notificationContainer}>
-            <Text>notifications</Text>
             <FlatList
                 style={styles.notificationFlatList}
                 data={notificationsList}

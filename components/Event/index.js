@@ -1,4 +1,4 @@
-import {Button, Text, View, FlatList, TouchableOpacity, ScrollView, Platform} from "react-native";
+import {Button, Text, View, FlatList, TouchableOpacity, ScrollView, Platform, TouchableHighlight} from "react-native";
 import dataEvents from '../../utils/dummyData/eventList.json';
 import dataIOTDevicesConfig from '../../utils/dummyData/managementIOTDeviceConfig.json';
 import iotDevices from '../../utils/dummyData/managementCameraDevice.json';
@@ -8,6 +8,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import {styles} from "./styles";
 import {TextInput} from "react-native-paper";
 import {convertDate} from "../../utils/helper/helper";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 export default function Event({navigation}) {
     console.log("Event Page")
@@ -165,14 +166,21 @@ export default function Event({navigation}) {
                 {Platform.OS == 'ios' ?
                     ''
                     :
-                    <TextInput
-                        style={styles.startDateInput}
-                        disabled={true}
-                        right={<TextInput.Icon style={{width: 40}} name='password' onPress={() => {
-                            setShowStartDate(true)
-                        }}/>}
-                        value={startDate.getDate() + "/" + (parseInt(startDate.getMonth()) + 1).toString() + "/" + startDate.getFullYear()}
-                    />
+                    <View style={{display: "flex", flexDirection: 'row',}}>
+                        <TextInput
+                            style={styles.startDateInput}
+                            disabled={true}
+                            value={startDate.getDate() + "/" + (parseInt(startDate.getMonth()) + 1).toString() + "/" + startDate.getFullYear()}
+                        />
+
+                        <Ionicons
+                            onPress={() => {
+                                setShowStartDate(true)
+                            }}
+                            style={{justifyContent: "center", textAlignVertical: "center", marginLeft: -30}}
+                            name='calendar-outline' size={20}
+                        />
+                    </View>
                 }
 
                 {showStartDate && <DateTimePicker
@@ -202,14 +210,30 @@ export default function Event({navigation}) {
                 {Platform.OS == 'ios' ?
                     ''
                     :
-                    <TextInput
-                        style={styles.endDateInput}
-                        disabled={true}
-                        right={<TextInput.Icon name='password' onPress={() => {
-                            setShowEndDate(true)
-                        }}/>}
-                        value={endDate.getDate() + "/" + (parseInt(endDate.getMonth()) + 1).toString() + "/" + endDate.getFullYear()}
-                    />
+                    <View style={{display: "flex", flexDirection: 'row',}}>
+                        <TextInput
+                            style={styles.endDateInput}
+                            disabled={true}
+                            value={endDate.getDate() + "/" + (parseInt(endDate.getMonth()) + 1).toString() + "/" + endDate.getFullYear()}
+                        />
+
+                        <Ionicons
+                            onPress={() => {
+                                setShowEndDate(true)
+                            }}
+                            style={{justifyContent: "center", textAlignVertical: "center", marginLeft: -30}}
+                            name='calendar-outline' size={20}
+                        />
+                    </View>
+
+                    // <TextInput
+                    //     style={styles.endDateInput}
+                    //     disabled={true}
+                    //     right={<TextInput.Icon name='password' onPress={() => {
+                    //         setShowEndDate(true)
+                    //     }}/>}
+                    //     value={endDate.getDate() + "/" + (parseInt(endDate.getMonth()) + 1).toString() + "/" + endDate.getFullYear()}
+                    // />
                 }
 
 
@@ -225,11 +249,31 @@ export default function Event({navigation}) {
 
             </View>
 
-            <View>
-                <Button title='Tìm kiếm' onPress={handleSearchEventsList}/>
-            </View>
-            <View>
-                <Button title='Reset' onPress={handleResetEventsList}/>
+            {/*<View style={styles.searchButtonView}>*/}
+            {/*    <Button style={styles.searchButton} color="rgb(33, 150, 243)" title='Tìm kiếm' onPress={handleSearchEventsList}/>*/}
+            {/*</View>*/}
+
+            {/*<View style={styles.resetButtonView}>*/}
+            {/*    <Button title='Reset' onPress={handleResetEventsList}/>*/}
+            {/*</View>*/}
+
+
+            <View style={styles.containerSearchAndButton}>
+
+                <TouchableHighlight style={styles.resetTouchable}
+                                    onPress={handleResetEventsList}
+                                    underlayColor="#fff"
+                >
+                    <Text>Reset</Text>
+                </TouchableHighlight>
+
+                <TouchableHighlight style={styles.searchTouchable}
+                                    onPress={handleSearchEventsList}
+                                    underlayColor="#fff"
+                >
+                    <Text>Tìm kiếm</Text>
+                </TouchableHighlight>
+
             </View>
 
 

@@ -48,9 +48,7 @@ export default function ConfigurationCameraList ({navigation, camerasList}) {
 
 
     return (
-        <View>
-            <Text>camera list</Text>
-
+        <View style={styles.cameraListContainer}>
             <FlatList
                 style={styles.flatListStyle}
                 // data={camerasList}

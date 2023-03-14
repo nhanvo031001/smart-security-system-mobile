@@ -62,14 +62,12 @@ export const styles = StyleSheet.create({
     },
 
     recentEventBlock: {
-        // backgroundColor: 'grey',
         margin: 10,
         display: 'flex',
         flexDirection: 'row'
     },
 
     recentEventInfoRight: {
-        // backgroundColor: 'red',
         backgroundColor: '#E4E7EC',
         borderRadius: 10,
         width: '60%',
@@ -86,7 +84,7 @@ export const styles = StyleSheet.create({
 
     eventName: {
         fontWeight: "bold",
-        fontSize: 16,
+        fontSize: 17,
         marginBottom: 10
     },
 
@@ -100,6 +98,7 @@ export const styles = StyleSheet.create({
         borderColor: "#7875FF",
         borderRadius: 3,
         borderWidth: 2,
+        paddingLeft: 5
     },
 
     eventAddress: {
