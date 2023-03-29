@@ -17,13 +17,14 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         display: 'flex',
-        backgroundColor: 'red'
+        // backgroundColor: 'red'
     },
 
     logoutView: {
         width: '40%',
         height: 50,
-        backgroundColor: 'blue',
+        // backgroundColor: 'blue',
+        backgroundColor: '#1e90ff',
         alignItems: 'center',
         display: 'flex',
         justifyContent: 'center',
@@ -31,6 +32,7 @@ export const styles = StyleSheet.create({
     },
 
     logoutText: {
-
-    }
+        color: "white",
+        fontWeight: "bold",
+    }   
 });

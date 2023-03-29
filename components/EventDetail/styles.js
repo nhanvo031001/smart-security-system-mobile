@@ -1,4 +1,4 @@
-import {StyleSheet} from "react-native";
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     eventDetailBlock: {
@@ -11,12 +11,14 @@ export const styles = StyleSheet.create({
 
     eventDetailLeft: {
         width: '30%',
-        backgroundColor: 'red',
-        marginLeft: 10
+        // backgroundColor: '#D0D5DD',
+        marginLeft: 10,
+        fontWeight: "bold",
     },
 
     eventDetailRight: {
-        width: '70%', backgroundColor: 'yellow'
+        width: '70%',
+        // backgroundColor: 'yellow'
     },
 
     editResponseButton: {

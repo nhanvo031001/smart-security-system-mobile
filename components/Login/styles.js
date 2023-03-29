@@ -36,7 +36,8 @@ export const styles = StyleSheet.create({
     },
 
     usernameContainer: {
-        backgroundColor: "yellow",
+        // backgroundColor: "yellow",
+        backgroundColor: "#D0D5DD",
         borderRadius: 10,
         width: "90%",
         height: 45,
@@ -52,7 +53,8 @@ export const styles = StyleSheet.create({
     },
 
     passwordContainer: {
-        backgroundColor: "yellow",
+        // backgroundColor: "yellow",
+        backgroundColor: "#D0D5DD",
         borderRadius: 10,
         width: "90%",
         height: 45,
@@ -96,7 +98,8 @@ export const styles = StyleSheet.create({
     loginView: {
         width: '40%',
         height: 50,
-        backgroundColor: 'blue',
+        // backgroundColor: 'blue',
+        backgroundColor: '#1e90ff',
         alignItems: 'center',
         display: 'flex',
         justifyContent: 'center',
@@ -105,6 +108,7 @@ export const styles = StyleSheet.create({
     },
 
     loginText: {
-        fontWeight: "bold"
+        fontWeight: "bold",
+        color: "white",
     }
 });

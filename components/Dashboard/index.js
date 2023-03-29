@@ -1,20 +1,27 @@
-import {Image, ScrollView, Text, TouchableOpacity, View} from "react-native";
-import {appStyles} from "../../styles/appStyles";
-import {PieChart, ProgressChart} from "react-native-chart-kit";
-import {Dimensions} from "react-native";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { appStyles } from "../../styles/appStyles";
+import { PieChart, ProgressChart } from "react-native-chart-kit";
+import { Dimensions } from "react-native";
+import { useEffect, useState } from "react";
 import dataEvents from '../../utils/dummyData/eventList.json';
-import {useEffect, useState} from "react";
 import dataIOTDevicesConfig from '../../utils/dummyData/managementIOTDeviceConfig.json';
 import iotDevices from '../../utils/dummyData/managementCameraDevice.json';
 import cameraDevices from '../../utils/dummyData/managementIOTDevice.json';
+import dataBuildings from '../../utils/dummyData/managementBuilding.json';
+import dataEventsType from '../../utils/dummyData/configurationEventType.json';
 import ImageModal from 'react-native-image-modal';
-import {styles} from "./styles";
+import { styles } from "./styles";
 
 const screenWidth = Dimensions.get("window").width;
 
-export default function Dashboard({navigation}) {
+export default function Dashboard({ navigation }) {
 
+    const [iotDevicesMap, setIotDevicesMap] = useState([]);           // map
+    const [cameraDevicesMap, setCameraDevicesMap] = useState([]);     // map
+    const [buildingsList, setBuildingsList] = useState([]);
     const [recentEvents, setRecentEvents] = useState([]);
+    const [events, setEvents] = useState([]);
+    const [dataPieChart, setDataPieChart] = useState([]);
     const mapperRecentEvents = (events) => {
         let devicesList = iotDevices.concat(cameraDevices);
         let latestEvents = [];
@@ -23,7 +30,18 @@ export default function Dashboard({navigation}) {
             let event_name = '', device_name = '', address = '', id_iot_config = '';
             for (let i = 0; i < dataIOTDevicesConfig.length; i++) {
                 if (zone == dataIOTDevicesConfig[i]['zone']) {
-                    event_name = dataIOTDevicesConfig[i].event_name;
+                    // event_name = dataIOTDevicesConfig[i].event_name;
+                    // device_name = dataIOTDevicesConfig[i].name;
+                    // id_iot_config = dataIOTDevicesConfig[i].id;
+                    // break;
+
+                    let connect_event_type = dataIOTDevicesConfig[i]['connect_event_type'];
+                    for (let j = 0; j < dataEventsType.length; j++) {
+                        if (dataEventsType[j].id == connect_event_type) {
+                            event_name = dataEventsType[j].event_name;
+                            break;
+                        }
+                    }
                     device_name = dataIOTDevicesConfig[i].name;
                     id_iot_config = dataIOTDevicesConfig[i].id;
                     break;
@@ -53,10 +71,41 @@ export default function Dashboard({navigation}) {
         // console.log("mapper event dashboard: ", latestEvents)
         setRecentEvents(latestEvents);
     }
+    const handleDataForPieChart = (numCameras, numIots) => {
+        const data = [
+            {
+                name: "Camera",
+                population: numCameras,
+                color: "#0BA5EC",
+                legendFontColor: "#0BA5EC",
+                legendFontSize: 15
+            },
+            {
+                name: "Cảm biến",
+                population: numIots,
+                color: "#F63D68",
+                legendFontColor: "#F63D68",
+                legendFontSize: 15
+            },
+        ];
+        setDataPieChart(data);
+    }
 
 
     useEffect(() => {
+        /* call api to get dataBuildings, dataEvents, iotDevicesMap, cameraDevicesMap */
+
+        let currentBuildings = dataBuildings;
+        let currentIotMap = iotDevices;
+        let currentCameraMap = cameraDevices;
+        let currentEvents = dataEvents;
+
+        setBuildingsList(currentBuildings);
+        setIotDevicesMap(currentIotMap);
+        setCameraDevicesMap(currentCameraMap);
+        setEvents(currentEvents);
         mapperRecentEvents(dataEvents);
+        handleDataForPieChart(currentCameraMap.length, currentIotMap.length);
     }, [])
 
 
@@ -64,17 +113,17 @@ export default function Dashboard({navigation}) {
         <ScrollView style={appStyles.appContainer}>
             <View style={styles.threeNumberBlock}>
                 <View style={styles.eachBlock}>
-                    <Text style={styles.numberOfEachBlock}> 4 </Text>
+                    <Text style={styles.numberOfEachBlock}> {buildingsList && buildingsList.length} </Text>
                     <Text style={styles.textOfEachBlock}> tòa nhà </Text>
                 </View>
 
                 <View style={styles.eachBlock}>
-                    <Text style={styles.numberOfEachBlock}> 7 </Text>
+                    <Text style={styles.numberOfEachBlock}> {parseInt(iotDevicesMap.length) + parseInt(cameraDevicesMap.length)} </Text>
                     <Text style={styles.textOfEachBlock}> thiết bị </Text>
                 </View>
 
                 <View style={styles.eachBlockEvent}>
-                    <Text style={styles.numberOfEachBlock}> 10123 </Text>
+                    <Text style={styles.numberOfEachBlock}> {events.length} </Text>
                     <Text style={styles.textOfEachBlock}> sự kiện </Text>
                 </View>
             </View>
@@ -82,7 +131,7 @@ export default function Dashboard({navigation}) {
 
             <View style={styles.pieChartContainer}>
                 <PieChart
-                    data={data}
+                    data={dataPieChart}
                     width={screenWidth}
                     height={220}
                     chartConfig={styles.chartConfig}
@@ -107,8 +156,8 @@ export default function Dashboard({navigation}) {
                                 <ImageModal
                                     resizeMode="contain"
                                     imageBackgroundColor="#000000"
-                                    style={{width: 150, height: 150,}}
-                                    source={{uri: url,}}
+                                    style={{ width: 150, height: 150, }}
+                                    source={{ uri: url, }}
                                 />
                             </View>
                             <View style={styles.recentEventInfoRight}>
@@ -131,21 +180,21 @@ export default function Dashboard({navigation}) {
     );
 }
 
-const data = [
-    {
-        name: "Camera",
-        population: 4,
-        color: "#0BA5EC",
-        // legendFontColor: "#7F7F7F",
-        legendFontColor: "#0BA5EC",
-        legendFontSize: 15
-    },
-    {
-        name: "Cảm biến",
-        population: 3,
-        color: "#F63D68",
-        // legendFontColor: "#7F7F7F",
-        legendFontColor: "#F63D68",
-        legendFontSize: 15
-    },
-];
+// const data = [
+//     {
+//         name: "Camera",
+//         population: 4,
+//         color: "#0BA5EC",
+//         // legendFontColor: "#7F7F7F",
+//         legendFontColor: "#0BA5EC",
+//         legendFontSize: 15
+//     },
+//     {
+//         name: "Cảm biến",
+//         population: 3,
+//         color: "#F63D68",
+//         // legendFontColor: "#7F7F7F",
+//         legendFontColor: "#F63D68",
+//         legendFontSize: 15
+//     },
+// ];

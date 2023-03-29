@@ -3,6 +3,7 @@ import dataEvents from '../../utils/dummyData/eventList.json';
 import dataIOTDevicesConfig from '../../utils/dummyData/managementIOTDeviceConfig.json';
 import iotDevices from '../../utils/dummyData/managementCameraDevice.json';
 import cameraDevices from '../../utils/dummyData/managementIOTDevice.json';
+import dataEventsType from '../../utils/dummyData/configurationEventType.json';
 import {useEffect, useState} from "react";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {styles} from "./styles";
@@ -47,7 +48,18 @@ export default function Event({navigation}) {
             let event_name = '', device_name = '', address = '', id_iot_config = '';
             for (let i = 0; i < dataIOTDevicesConfig.length; i++) {
                 if (zone == dataIOTDevicesConfig[i]['zone']) {
-                    event_name = dataIOTDevicesConfig[i].event_name;
+                    // event_name = dataIOTDevicesConfig[i].event_name;
+                    // device_name = dataIOTDevicesConfig[i].name;
+                    // id_iot_config = dataIOTDevicesConfig[i].id;
+                    // break;
+
+                    let connect_event_type = dataIOTDevicesConfig[i]['connect_event_type'];
+                    for (let j = 0; j < dataEventsType.length; j++) {
+                        if (dataEventsType[j].id == connect_event_type) {
+                            event_name = dataEventsType[j].event_name;
+                            break;
+                        }
+                    }
                     device_name = dataIOTDevicesConfig[i].name;
                     id_iot_config = dataIOTDevicesConfig[i].id;
                     break;
@@ -140,6 +152,8 @@ export default function Event({navigation}) {
 
 
     useEffect(() => {
+        /* call api to get iotDevicesMap, cameraDevicesMap, dataIOTDevicesConfig, dataEvents, dataEventsType */
+
         setOriginalData(dataEvents);
         setConfigurationIOTsList(dataIOTDevicesConfig);
         let dataDevices = iotDevices.concat(cameraDevices);
