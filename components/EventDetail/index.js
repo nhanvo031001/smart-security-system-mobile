@@ -1,9 +1,10 @@
-import {Button, Image, KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, View} from "react-native";
-import {styles} from "./styles";
-import {RadioButton} from 'react-native-paper';
-import {useEffect, useState} from "react";
+import { Button, Image, KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, View, TouchableOpacity } from "react-native";
+import { styles } from "./styles";
+import { RadioButton } from 'react-native-paper';
+import { useEffect, useState } from "react";
+import ImageModal from "react-native-image-modal";
 
-export default function EventDetail({navigation, route}) {
+export default function EventDetail({ navigation, route }) {
     console.log("route params: ", route.params)
     const [eventDetailInfoOriginal, setEventDetailInfoOriginal] = useState({});
     const [eventDetailInfo, setEventDetailInfo] = useState({});
@@ -15,7 +16,7 @@ export default function EventDetail({navigation, route}) {
     }
     const handleCancelEditResponse = (e) => {
         setDisabledResponse(!disabledResponse);
-        setEventDetailInfo({...eventDetailInfoOriginal});
+        setEventDetailInfo({ ...eventDetailInfoOriginal });
     }
     const handleChangeResponseComment = (e) => {
         console.log("change comment: ", e);
@@ -31,7 +32,7 @@ export default function EventDetail({navigation, route}) {
 
 
     return (
-        <ScrollView>
+        <ScrollView style={{ marginLeft: 5, marginRight: 5 }}>
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
                 <View style={styles.eventDetailBlock}>
                     <Text style={styles.eventDetailLeft}>Mã số:</Text>
@@ -67,8 +68,26 @@ export default function EventDetail({navigation, route}) {
                     <Text style={styles.eventDetailLeft}>Hình ảnh:</Text>
                     <Text style={styles.eventDetailRight}></Text>
                 </View>
-                <Image style={{width: 200, height: 200, marginLeft: 7}}
-                       source={{uri: 'https://caodang.fpt.edu.vn/wp-content/uploads/react-native.jpg'}}/>
+                <TouchableOpacity style={{
+                    backgroundColor: "white",
+                    width: 300,
+                    height: 300,
+                    marginLeft: 50,
+                    marginTop: 10
+                }}>
+                    <ImageModal
+                        resizeMode="contain"
+                        style={{ width: 300, height: 300, }}
+                        source={{ uri: 'https://media.istockphoto.com/id/621984692/photo/traffic-security-camera.jpg?s=612x612&w=0&k=20&c=w1TrTBvor2fNfBPxfFpuTm5fShzkuHgRoVVUJcTK1sA=', }}
+                    />
+                </TouchableOpacity>
+                {/* <ImageModal
+                    resizeMode="contain"
+                    style={{ width: 200, height: 200, }}
+                    source={{ uri: 'https://caodang.fpt.edu.vn/wp-content/uploads/react-native.jpg' }}
+                /> */}
+                {/* <Image style={{ width: 200, height: 200, marginLeft: 7 }}
+                    source={{ uri: 'https://caodang.fpt.edu.vn/wp-content/uploads/react-native.jpg' }} /> */}
 
                 <View style={styles.eventDetailBlock}>
                     <Text style={styles.eventDetailLeft}>Video:</Text>
@@ -88,11 +107,11 @@ export default function EventDetail({navigation, route}) {
                         >
                             <View style={styles.trueAlarmArea}>
                                 <Text style={styles.trueAlarmText}>True</Text>
-                                <RadioButton disabled={disabledResponse} value="true"/>
+                                <RadioButton disabled={disabledResponse} value="true" />
                             </View>
                             <View style={styles.trueAlarmArea}>
                                 <Text style={styles.trueAlarmText}>False</Text>
-                                <RadioButton disabled={disabledResponse} value="false"/>
+                                <RadioButton disabled={disabledResponse} value="false" />
                             </View>
                         </RadioButton.Group>
                     </View>
@@ -117,10 +136,10 @@ export default function EventDetail({navigation, route}) {
                     :
                     <View style={styles.commentConfirmCancelButton}>
                         <View style={styles.commentConfirm}>
-                            <Button onPress={handleConfirmEditResponse} title='Xác nhận'/>
+                            <Button onPress={handleConfirmEditResponse} title='Xác nhận' />
                         </View>
                         <View style={styles.commentCancel}>
-                            <Button onPress={handleCancelEditResponse} color='red' title='Hủy'/>
+                            <Button onPress={handleCancelEditResponse} color='red' title='Hủy' />
                         </View>
                     </View>
                 }

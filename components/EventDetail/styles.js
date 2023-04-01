@@ -22,13 +22,15 @@ export const styles = StyleSheet.create({
     },
 
     editResponseButton: {
-        width: 50,
+        width: '100%',
         marginBottom: -20,
         display: 'flex',
         justifyContent: 'flex-end',
         alignItems: 'flex-end',
         flexDirection: 'row',
-        marginTop: 10
+        marginTop: 10,
+        paddingRight: 10,
+
     },
 
     trueAlarmArea: {
@@ -41,15 +43,22 @@ export const styles = StyleSheet.create({
 
     commentInputArea: {
         marginLeft: 7,
-        backgroundColor: 'yellow'
+        // backgroundColor: 'yellow'
+        backgroundColor: "white",
+        marginBottom: 30,
     },
 
     commentConfirmCancelButton: {
-        display: 'flex', flexDirection: 'row', justifyContent: 'flex-end'
+        display: 'flex', flexDirection: 'row', justifyContent: 'flex-end',
+        paddingRight: 10,
+        marginTop: 10,
+        marginBottom: 30
     },
 
     commentConfirm: {
-        width: 100
+        width: 100,
+        backgroundColor: "#87cefa",
+        marginRight: 10
     },
 
     commentCancel: {

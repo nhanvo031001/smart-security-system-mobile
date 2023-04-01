@@ -1,7 +1,7 @@
-import {StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Configuration from "./components/Configuration";
 import Event from "./components/Event";
 import Welcome from "./components/Welcome";
@@ -26,23 +26,24 @@ export default function App() {
         <NavigationContainer>
             <Stack.Navigator
                 initialRouteName='Login'
-                screenOptions={({route, navigation}) => ({
+                screenOptions={({ route, navigation }) => ({
                     headerTitleAlign: 'center',
                 })}
             >
-                <Stack.Screen name="Welcome" component={Welcome} options={{title: 'Smart Security System'}}/>
-                <Stack.Screen name="Event" component={Event} options={{title: 'Sự kiện'}}/>
-                <Stack.Screen name="EventDetail" component={EventDetail} options={{title: 'Chi tiết sự kiện'}}/>
-                <Stack.Screen name="Configuration" component={Configuration} options={{title: 'Cấu hình'}}/>
-                <Stack.Screen name="ConfigurationCameraDetail" component={ConfigurationCameraDetail} options={{title: 'Chi tiết camera'}}/>
-                <Stack.Screen name="ConfigurationIOTDetail" component={ConfigurationIOTDetail} options={{title: 'Chi tiết cảm biến'}}/>
-                <Stack.Screen name="Monitor" component={Monitor} options={{title: 'Giám sát'}}/>
-                <Stack.Screen name="Dashboard" component={Dashboard} options={{title: 'Tổng quát'}}/>
-                <Stack.Screen name="Report" component={Report} options={{title: 'Báo cáo'}}/>
-                <Stack.Screen name="Login" component={Login} options={{title: 'Trang đăng nhập'}}/>
-                <Stack.Screen name="LoginForgetPassword" component={LoginForgetPassword} options={{title: 'Quên mật khẩu'}}/>
-                <Stack.Screen name="Personal" component={Personal} options={{title: 'Cá nhân'}}/>
-                <Stack.Screen name="Notifications" component={Notifications} options={{title: 'Thông báo'}}/>
+                <Stack.Screen name="Welcome" component={Welcome} options={{ title: 'Smart Security System' }} />
+                <Stack.Screen name="Event" component={Event} options={{ title: 'Sự kiện' }} />
+                <Stack.Screen name="EventDetail" component={EventDetail} options={{ title: 'Chi tiết sự kiện' }} />
+                <Stack.Screen name="Configuration" component={Configuration} options={{ title: 'Cấu hình' }} />
+                <Stack.Screen name="ConfigurationCameraDetail" component={ConfigurationCameraDetail} options={{ title: 'Chi tiết camera' }} />
+                <Stack.Screen name="ConfigurationIOTDetail" component={ConfigurationIOTDetail} options={{ title: 'Chi tiết cảm biến' }} />
+                <Stack.Screen name="Monitor" component={Monitor} options={{ title: 'Giám sát' }} />
+                <Stack.Screen name="Dashboard" component={Dashboard} options={{ title: 'Tổng quát' }} />
+                <Stack.Screen name="Report" component={Report} options={{ title: 'Báo cáo' }} />
+                {/* <Stack.Screen name="Login" component={Login} options={{title: 'Trang đăng nhập'}}/> */}
+                <Stack.Screen name="Login" component={Login} options={{ title: '' }} />
+                <Stack.Screen name="LoginForgetPassword" component={LoginForgetPassword} options={{ title: 'Quên mật khẩu' }} />
+                <Stack.Screen name="Personal" component={Personal} options={{ title: 'Cá nhân' }} />
+                <Stack.Screen name="Notifications" component={Notifications} options={{ title: 'Thông báo' }} />
 
             </Stack.Navigator>
         </NavigationContainer>

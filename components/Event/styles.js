@@ -1,11 +1,13 @@
-import {Platform, StyleSheet} from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
 
     eventContainer: {
         height: "100%",
-        marginLeft: 15,
-        marginRight: 15,
+        // marginLeft: 15,
+        // marginRight: 15,
+        marginLeft: 5,
+        marginRight: 5,
         marginTop: 15,
         flex: 1,
     },
@@ -68,9 +70,9 @@ export const styles = StyleSheet.create({
         marginBottom: 10
     },
 
-    headerFirst: {width: '50%', fontWeight: "bold"},
-    headerSecond: {width: '13%', fontWeight: "bold"},
-    headerThird: {width: '37%', fontWeight: "bold", alignItems: "flex-end", textAlign: "right"},
+    headerFirst: { width: '50%', fontWeight: "bold" },
+    headerSecond: { width: '13%', fontWeight: "bold" },
+    headerThird: { width: '37%', fontWeight: "bold", alignItems: "flex-end", textAlign: "right" },
 
     flatListStyle: {
         flexGrow: 0,
@@ -78,7 +80,7 @@ export const styles = StyleSheet.create({
         marginTop: 10
     },
 
-    startDateContainer: {display: 'flex', flexDirection: 'row'},
+    startDateContainer: { display: 'flex', flexDirection: 'row' },
 
     startDate: {
         width: 120, height: 50,
@@ -93,9 +95,9 @@ export const styles = StyleSheet.create({
         width: 150,
     },
 
-    startDateLib: {marginLeft: 10},
+    startDateLib: { marginLeft: 10 },
 
-    endDateContainer: {display: 'flex', flexDirection: 'row'},
+    endDateContainer: { display: 'flex', flexDirection: 'row' },
 
     endDate: {
         width: 120, height: 50,
@@ -111,7 +113,7 @@ export const styles = StyleSheet.create({
 
     },
 
-    endDateLib: {marginLeft: 10},
+    endDateLib: { marginLeft: 10 },
 
     searchButtonView: {
         width: 100,
@@ -127,7 +129,7 @@ export const styles = StyleSheet.create({
         width: 100,
     },
 
-    containerSearchAndButton:{
+    containerSearchAndButton: {
         display: "flex",
         flexDirection: "row",
         justifyContent: "flex-end",

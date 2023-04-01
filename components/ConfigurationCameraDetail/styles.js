@@ -1,4 +1,4 @@
-import {StyleSheet} from "react-native";
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     cameraConfigDetailBlock: {
@@ -11,12 +11,14 @@ export const styles = StyleSheet.create({
 
     cameraConfigDetailLeft: {
         width: '30%',
-        backgroundColor: 'red',
-        marginLeft: 10
+        // backgroundColor: 'red',
+        marginLeft: 10,
+        fontWeight: "bold",
     },
 
     cameraConfigDetailRight: {
-        width: '70%', backgroundColor: 'yellow'
+        width: '70%',
+        // backgroundColor: 'yellow'
     },
 
     editResponseButton: {
