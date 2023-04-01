@@ -1,17 +1,17 @@
-import {Button, Text, View, FlatList, TouchableOpacity, ScrollView, Platform, TouchableHighlight} from "react-native";
+import { Button, Text, View, FlatList, TouchableOpacity, ScrollView, Platform, TouchableHighlight } from "react-native";
 import dataEvents from '../../utils/dummyData/eventList.json';
 import dataIOTDevicesConfig from '../../utils/dummyData/managementIOTDeviceConfig.json';
 import iotDevices from '../../utils/dummyData/managementCameraDevice.json';
 import cameraDevices from '../../utils/dummyData/managementIOTDevice.json';
 import dataEventsType from '../../utils/dummyData/configurationEventType.json';
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {styles} from "./styles";
-import {TextInput} from "react-native-paper";
-import {convertDate} from "../../utils/helper/helper";
+import { styles } from "./styles";
+import { TextInput } from "react-native-paper";
+import { convertDate } from "../../utils/helper/helper";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-export default function Event({navigation}) {
+export default function Event({ navigation }) {
     console.log("Event Page")
     const [originalData, setOriginalData] = useState([]);
     const [eventsList, setEventsList] = useState([]);
@@ -24,7 +24,7 @@ export default function Event({navigation}) {
     // const [showEndDate, setShowEndDate] = useState(false);
     const [showEndDate, setShowEndDate] = useState(Platform.OS == 'ios' ? true : false);
     const FlatListItem = (item, index) => {
-        return <TouchableOpacity onPress={() => navigation.navigate('EventDetail', item)}>
+        return <TouchableOpacity onPress={() => navigation.navigate('EventDetail', item, { onCallback: confirmStatusEventCallback })}>
             <View style={styles.itemBlock}>
                 <Text style={styles.itemFirst}>{item.event_name}</Text>
                 <Text style={styles.itemSecond}>{item['zone']}</Text>
@@ -75,7 +75,7 @@ export default function Event({navigation}) {
             }
 
             let created_at = new Date(ele.created_at).toLocaleString();
-            return {...ele, event_name, device_name, address, created_at, zone: zone, key: zone}
+            return { ...ele, event_name, device_name, address, created_at, zone: zone, key: zone }
         })
 
         if (mapperForOriginalData == false) {
@@ -83,6 +83,8 @@ export default function Event({navigation}) {
         } else {
             setOriginalData(events);
         }
+
+        console.log("events after mapping: ", events)
     }
     const onChangeStartDate = (event, selectedDate) => {
         if (event.type == "dismissed") {
@@ -140,7 +142,7 @@ export default function Event({navigation}) {
             let mm = Platform.OS == 'ios' ? (dateSplit[1].length == 1 ? '0' + dateSplit[1] : dateSplit[1]) : (dateSplit[0].length == 1 ? '0' + dateSplit[0] : dateSplit[0]);
             let yyyy = dateSplit[2];
             let eventDate = yyyy + '-' + mm + '-' + dd;
-            console.log(event["zone"], eventDate)
+            // console.log(event["zone"], eventDate)
             let eventDateObject = Date.parse(eventDate);
             if (startDateObject <= eventDateObject && eventDateObject <= endDateObject) {
                 return event;
@@ -148,6 +150,9 @@ export default function Event({navigation}) {
         })
         // console.log("filtering date event: ", currentEventsList);
         setEventsList(currentEventsList);
+    }
+    const confirmStatusEventCallback = (event) => {
+
     }
 
 
@@ -180,7 +185,7 @@ export default function Event({navigation}) {
                 {Platform.OS == 'ios' ?
                     ''
                     :
-                    <View style={{display: "flex", flexDirection: 'row',}}>
+                    <View style={{ display: "flex", flexDirection: 'row', }}>
                         <TextInput
                             style={styles.startDateInput}
                             disabled={true}
@@ -191,7 +196,7 @@ export default function Event({navigation}) {
                             onPress={() => {
                                 setShowStartDate(true)
                             }}
-                            style={{justifyContent: "center", textAlignVertical: "center", marginLeft: -30}}
+                            style={{ justifyContent: "center", textAlignVertical: "center", marginLeft: -30 }}
                             name='calendar-outline' size={20}
                         />
                     </View>
@@ -224,7 +229,7 @@ export default function Event({navigation}) {
                 {Platform.OS == 'ios' ?
                     ''
                     :
-                    <View style={{display: "flex", flexDirection: 'row',}}>
+                    <View style={{ display: "flex", flexDirection: 'row', }}>
                         <TextInput
                             style={styles.endDateInput}
                             disabled={true}
@@ -235,7 +240,7 @@ export default function Event({navigation}) {
                             onPress={() => {
                                 setShowEndDate(true)
                             }}
-                            style={{justifyContent: "center", textAlignVertical: "center", marginLeft: -30}}
+                            style={{ justifyContent: "center", textAlignVertical: "center", marginLeft: -30 }}
                             name='calendar-outline' size={20}
                         />
                     </View>
@@ -275,15 +280,15 @@ export default function Event({navigation}) {
             <View style={styles.containerSearchAndButton}>
 
                 <TouchableHighlight style={styles.resetTouchable}
-                                    onPress={handleResetEventsList}
-                                    underlayColor="#fff"
+                    onPress={handleResetEventsList}
+                    underlayColor="#fff"
                 >
                     <Text>Reset</Text>
                 </TouchableHighlight>
 
                 <TouchableHighlight style={styles.searchTouchable}
-                                    onPress={handleSearchEventsList}
-                                    underlayColor="#fff"
+                    onPress={handleSearchEventsList}
+                    underlayColor="#fff"
                 >
                     <Text>Tìm kiếm</Text>
                 </TouchableHighlight>
@@ -294,7 +299,7 @@ export default function Event({navigation}) {
             <FlatList
                 style={styles.flatListStyle}
                 data={eventsList}
-                renderItem={({item, index}) => {
+                renderItem={({ item, index }) => {
                     return (FlatListItem(item, index));
                 }}
                 keyExtractor={(item, index) => index.toString()}
