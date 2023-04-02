@@ -1,8 +1,8 @@
 import { Button, Text, View, FlatList, TouchableOpacity, ScrollView, Platform, TouchableHighlight } from "react-native";
 import dataEvents from '../../utils/dummyData/eventList.json';
 import dataIOTDevicesConfig from '../../utils/dummyData/managementIOTDeviceConfig.json';
-import iotDevices from '../../utils/dummyData/managementCameraDevice.json';
-import cameraDevices from '../../utils/dummyData/managementIOTDevice.json';
+import cameraDevices from '../../utils/dummyData/managementCameraDevice.json';
+import iotDevices from '../../utils/dummyData/managementIOTDevice.json';
 import dataEventsType from '../../utils/dummyData/configurationEventType.json';
 import { useEffect, useState } from "react";
 import DateTimePicker from '@react-native-community/datetimepicker';

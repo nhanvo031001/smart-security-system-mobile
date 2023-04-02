@@ -3,6 +3,7 @@ import { styles } from "./styles";
 import { RadioButton } from 'react-native-paper';
 import { useEffect, useState } from "react";
 import ImageModal from "react-native-image-modal";
+import VideoView from "../VideoView";
 
 export default function EventDetail({ navigation, route }) {
     // console.log("route params: ", route.params)
@@ -99,8 +100,9 @@ export default function EventDetail({ navigation, route }) {
 
                 <View style={styles.eventDetailBlock}>
                     <Text style={styles.eventDetailLeft}>Video:</Text>
-                    <Text style={styles.eventDetailRight}>Chưa có video</Text>
+                    <Text style={styles.eventDetailRight}></Text>
                 </View>
+                <VideoView video_url={''} />
 
 
                 <View style={styles.editResponseButton}>
