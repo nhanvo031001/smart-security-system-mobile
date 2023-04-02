@@ -84,7 +84,7 @@ export default function Event({ navigation }) {
             setOriginalData(events);
         }
 
-        console.log("events after mapping: ", events)
+        // console.log("events after mapping: ", events)
     }
     const onChangeStartDate = (event, selectedDate) => {
         if (event.type == "dismissed") {

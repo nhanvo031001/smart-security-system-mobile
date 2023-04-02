@@ -1,21 +1,22 @@
-import {Button, Text, View} from "react-native";
+import { Button, Text, View } from "react-native";
 import '../../styles/appStyles'
-import {appStyles} from "../../styles/appStyles";
-import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import { appStyles } from "../../styles/appStyles";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MainTabScreen from "../MainTabScreen";
 import Dashboard from "../Dashboard";
 import Event from "../Event"
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Configuration from "../Configuration";
-import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import Report from "../Report";
 import Personal from "../Personal";
 import Notifications from "../Notifications";
+import VideoView from "../VideoView";
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
 
-export default function Welcome ({navigation}) {
+export default function Welcome({ navigation }) {
 
     return (
         <Tab.Navigator
@@ -52,6 +53,7 @@ export default function Welcome ({navigation}) {
             {/*<Tab.Screen name="Profile" component={Report} options={{ title: "Profile" }} />*/}
             <Tab.Screen name="Notifications" component={Notifications} options={{ title: "Notifications" }} />
             <Tab.Screen name="Personal" component={Personal} options={{ title: "Personal" }} />
+            <Tab.Screen name="VideoView" component={VideoView} options={{ title: "VideoView" }} />
         </Tab.Navigator>
 
     );

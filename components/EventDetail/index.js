@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import ImageModal from "react-native-image-modal";
 
 export default function EventDetail({ navigation, route }) {
-    console.log("route params: ", route.params)
-    console.log("function call back: ", navigation.params)
+    // console.log("route params: ", route.params)
+    // console.log("function call back: ", navigation.params)
     const [eventDetailInfoOriginal, setEventDetailInfoOriginal] = useState({});
     const [eventDetailInfo, setEventDetailInfo] = useState({});
     const [trueAlarmRadio, setTrueAlarmRadio] = useState();
@@ -66,35 +66,14 @@ export default function EventDetail({ navigation, route }) {
                 </View>
 
                 {/* <View style={styles.eventDetailBlock}> */}
-                <View style={{ display: 'flex', flexDirection: "row", justifyContent: "space-evenly", marginTop: 20 }}>
-                    <Text style={{
-                        width: '30%',
-                        marginLeft: 10,
-                        fontWeight: "bold",
-                    }}>Trạng thái:</Text>
-                    <Text style={{
-                        width: '50%',
-                    }}>{eventDetailInfo.confirm_status == "done" ? "Đã xác nhận" : "Chưa xác nhận"}</Text>
+                <View style={styles.confirmStatusBlock}>
+                    <Text style={styles.confirmStatusText}>Trạng thái:</Text>
+                    <Text style={styles.confirmStatusResult}>{eventDetailInfo.confirm_status == "done" ? "Đã xác nhận" : "Chưa xác nhận"}</Text>
                     {eventDetailInfo.confirm_status == "done" ?
                         ""
                         :
-                        <TouchableOpacity style={{
-                            width: '20%',
-                            backgroundColor: "#2196F3",
-                            textAlign: "center",
-                            alignItems: "center",
-                            height: 25,
-                            borderRadius: 4,
-                            marginRight: 5,
-                            textAlignVertical: "center"
-                        }}>
-                            <Text style={{
-                                color: '#fff',
-                                fontWeight: "bold",
-                                textAlignVertical: "center",
-                                height: 25,
-                                textTransform: "uppercase",
-                            }}>Xác nhận</Text>
+                        <TouchableOpacity style={styles.confirmStatusButton}>
+                            <Text style={styles.confirmStatusButtonText}>Xác nhận</Text>
                         </TouchableOpacity>
                     }
                 </View>
@@ -103,13 +82,7 @@ export default function EventDetail({ navigation, route }) {
                     <Text style={styles.eventDetailLeft}>Hình ảnh:</Text>
                     <Text style={styles.eventDetailRight}></Text>
                 </View>
-                <TouchableOpacity style={{
-                    backgroundColor: "white",
-                    width: 300,
-                    height: 300,
-                    marginLeft: 50,
-                    marginTop: 10
-                }}>
+                <TouchableOpacity style={styles.imageViewBlock}>
                     <ImageModal
                         resizeMode="contain"
                         style={{ width: 300, height: 300, }}

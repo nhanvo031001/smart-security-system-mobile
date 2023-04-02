@@ -3553,6 +3553,11 @@
     "path-browserify" "^1.0.0"
     "url-parse" "^1.5.9"
 
+"expo-av@~13.2.1":
+  "integrity" "sha512-mC0mYSzaOaZgXjzhW2l4Ag325JjH6q5IbptfwD7gkMOFYy7VPOMxEMUnetadbs3DDzmgE6vUWrTjUIUbwq59qg=="
+  "resolved" "https://registry.npmjs.org/expo-av/-/expo-av-13.2.1.tgz"
+  "version" "13.2.1"
+
 "expo-constants@~14.2.0", "expo-constants@~14.2.1":
   "integrity" "sha512-DD5u4QmBds2U7uYo409apV7nX+XjudARcgqe7S9aRFJ/6kyftmuxvk1DpaU4X42Av8z/tfKwEpuxl+vl7HHx/Q=="
   "resolved" "https://registry.npmjs.org/expo-constants/-/expo-constants-14.2.1.tgz"
@@ -6670,7 +6675,7 @@
     "kleur" "^3.0.3"
     "sisteransi" "^1.0.5"
 
-"prop-types@*", "prop-types@^15.0.0", "prop-types@^15.7.2":
+"prop-types@*", "prop-types@^15.0.0", "prop-types@^15.5.6", "prop-types@^15.7.2":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   "version" "15.8.1"
@@ -6875,10 +6880,15 @@
   "resolved" "https://registry.npmjs.org/react-native-material-menu/-/react-native-material-menu-2.0.0.tgz"
   "version" "2.0.0"
 
-"react-native-pager-view@*", "react-native-pager-view@>= 4.0.0":
-  "integrity" "sha512-fmTwgGwPxGCBusKAq7gHzm+s1Yp0qh5rKPoQszaCuxrb+76KgK4Qe82jJNPUp2xTZOKSw+FbJU2QahF8ncTl+w=="
-  "resolved" "https://registry.npmjs.org/react-native-pager-view/-/react-native-pager-view-6.1.4.tgz"
-  "version" "6.1.4"
+"react-native-media-controls@^2.3.0":
+  "integrity" "sha512-N10i12ZO+GIXjmdA9hQk/HuBm5u9xWPIOydG/2SvLEZcnY3xg3D8d2IJXRolzSm2jBRgEGSO4rMgRBU6MpdNMg=="
+  "resolved" "https://registry.npmjs.org/react-native-media-controls/-/react-native-media-controls-2.3.0.tgz"
+  "version" "2.3.0"
+
+"react-native-pager-view@*", "react-native-pager-view@^6.2.0", "react-native-pager-view@>= 4.0.0":
+  "integrity" "sha512-pf9OnL/Tkr+5s4Gjmsn7xh91PtJLDa6qxYa/bmtUhd/+s4cQdWQ8DIFoOFghwZIHHHwVdWtoXkp6HtpjN+r20g=="
+  "resolved" "https://registry.npmjs.org/react-native-pager-view/-/react-native-pager-view-6.2.0.tgz"
+  "version" "6.2.0"
 
 "react-native-paper@^5.2.0":
   "integrity" "sha512-FfKvfh4nBvetTusiuc1QMuNxXdNai4lthoyD+dNPM03RnIapcjoKHrhCD1EvVi5c1kBSKHrlXQ3OAW/8QCQXNw=="
@@ -6925,6 +6935,13 @@
     "react-freeze" "^1.0.0"
     "warn-once" "^0.1.0"
 
+"react-native-slider@^0.11.0":
+  "integrity" "sha512-jV9K87eu9uWr0uJIyrSpBLnCKvVlOySC2wynq9TFCdV9oGgjt7Niq8Q1A8R8v+5GHsuBw/s8vEj1AAkkUi+u+w=="
+  "resolved" "https://registry.npmjs.org/react-native-slider/-/react-native-slider-0.11.0.tgz"
+  "version" "0.11.0"
+  dependencies:
+    "prop-types" "^15.5.6"
+
 "react-native-svg@> 6.4.1", "react-native-svg@13.4.0":
   "integrity" "sha512-B3TwK+H0+JuRhYPzF21AgqMt4fjhCwDZ9QUtwNstT5XcslJBXC0FoTkdZo8IEb1Sv4suSqhZwlAY6lwOv3tHag=="
   "resolved" "https://registry.npmjs.org/react-native-svg/-/react-native-svg-13.4.0.tgz"
@@ -6953,7 +6970,7 @@
     "prop-types" "^15.7.2"
     "yargs" "^16.1.1"
 
-"react-native@*", "react-native@>= 0.50.0", "react-native@>= 0.59", "react-native@>= 0.64.3", "react-native@>=0.45.0", "react-native@>=0.60.0", "react-native@0.71.3":
+"react-native@*", "react-native@>= 0.50.0", "react-native@>= 0.59", "react-native@>= 0.64.3", "react-native@>=0.45.0", "react-native@>=0.60", "react-native@>=0.60.0", "react-native@0.71.3":
   "integrity" "sha512-RYJXCcQGa4NTfKiPgl92eRDUuQ6JGDnHqFEzRwJSqEx9lWvlvRRIebstJfurzPDKLQWQrvITR7aI7e09E25mLw=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.71.3.tgz"
   "version" "0.71.3"
@@ -7014,7 +7031,7 @@
     "object-assign" "^4.1.1"
     "react-is" "^16.12.0 || ^17.0.0 || ^18.0.0"
 
-"react@*", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.3.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17 || ^18", "react@> 16.7.0", "react@>= 17.0.1", "react@>=0.14.0", "react@>=16.3.0", "react@>=16.8", "react@>=17.0.0", "react@18.2.0":
+"react@*", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.3.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17 || ^18", "react@> 16.7.0", "react@>= 17.0.1", "react@>=0.14.0", "react@>=16", "react@>=16.3.0", "react@>=16.8", "react@>=17.0.0", "react@18.2.0":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"

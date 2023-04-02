@@ -63,5 +63,59 @@ export const styles = StyleSheet.create({
 
     commentCancel: {
         width: 60
-    }
+    },
+
+    backgroundVideo: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        width: 300,
+        height: 300,
+    },
+
+
+    confirmStatusBlock: {
+        display: 'flex', flexDirection: "row", justifyContent: "space-evenly", marginTop: 20,
+    },
+
+    confirmStatusText: {
+        width: '30%',
+        marginLeft: 10,
+        fontWeight: "bold",
+    },
+
+    confirmStatusResult: {
+        width: '50%',
+    },
+
+    confirmStatusButton: {
+        width: '20%',
+        backgroundColor: "#2196F3",
+        textAlign: "center",
+        alignItems: "center",
+        height: 25,
+        borderRadius: 4,
+        marginRight: 5,
+        textAlignVertical: "center"
+    },
+
+    confirmStatusButtonText: {
+        color: '#fff',
+        fontWeight: "bold",
+        textAlignVertical: "center",
+        height: 25,
+        textTransform: "uppercase",
+    },
+
+    imageViewBlock: {
+        backgroundColor: "white",
+        width: 300,
+        height: 300,
+        marginLeft: 50,
+        marginTop: 10
+    },
+
+
 });
