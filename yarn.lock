@@ -6839,6 +6839,11 @@
     "jscodeshift" "^0.13.1"
     "nullthrows" "^1.1.1"
 
+"react-native-dbb-rtmp@^1.0.1":
+  "integrity" "sha512-a+jDUxatF3T2McQq4DspIL+PcHRoG6sDJvyybeFziJe8tiiUZRUA5t2R8h8L96RB2sOoeDT2SFycb2cPTzYnPw=="
+  "resolved" "https://registry.npmjs.org/react-native-dbb-rtmp/-/react-native-dbb-rtmp-1.0.1.tgz"
+  "version" "1.0.1"
+
 "react-native-fast-image@^8.6.3":
   "integrity" "sha512-Sdw4ESidXCXOmQ9EcYguNY2swyoWmx53kym2zRsvi+VeFCHEdkO+WG1DK+6W81juot40bbfLNhkc63QnWtesNg=="
   "resolved" "https://registry.npmjs.org/react-native-fast-image/-/react-native-fast-image-8.6.3.tgz"
@@ -6884,6 +6889,11 @@
   "integrity" "sha512-N10i12ZO+GIXjmdA9hQk/HuBm5u9xWPIOydG/2SvLEZcnY3xg3D8d2IJXRolzSm2jBRgEGSO4rMgRBU6MpdNMg=="
   "resolved" "https://registry.npmjs.org/react-native-media-controls/-/react-native-media-controls-2.3.0.tgz"
   "version" "2.3.0"
+
+"react-native-nodemediaclient@^0.2.20":
+  "integrity" "sha512-LNSzoBYS7gGX6v4hWljS+0ymK8wmd40or4qD6nYY2fm9wHnQv5kqRi2QrRjkA7M8fLUDez3xYtKQjyCCzZx5hQ=="
+  "resolved" "https://registry.npmjs.org/react-native-nodemediaclient/-/react-native-nodemediaclient-0.2.20.tgz"
+  "version" "0.2.20"
 
 "react-native-pager-view@*", "react-native-pager-view@^6.2.0", "react-native-pager-view@>= 4.0.0":
   "integrity" "sha512-pf9OnL/Tkr+5s4Gjmsn7xh91PtJLDa6qxYa/bmtUhd/+s4cQdWQ8DIFoOFghwZIHHHwVdWtoXkp6HtpjN+r20g=="
@@ -6969,6 +6979,14 @@
   dependencies:
     "prop-types" "^15.7.2"
     "yargs" "^16.1.1"
+
+"react-native-vlc-media-player@^1.0.51":
+  "integrity" "sha512-cZ3D0I/VSfLzUc8k+ZYEWWzFKkOkRx5GXLlMreseqaHJQQ4GFeCskJUkdKxw9XNX93JuZbv90viJYXcylz3FYg=="
+  "resolved" "https://registry.npmjs.org/react-native-vlc-media-player/-/react-native-vlc-media-player-1.0.51.tgz"
+  "version" "1.0.51"
+  dependencies:
+    "react-native-slider" "^0.11.0"
+    "react-native-vector-icons" "^9.2.0"
 
 "react-native@*", "react-native@>= 0.50.0", "react-native@>= 0.59", "react-native@>= 0.64.3", "react-native@>=0.45.0", "react-native@>=0.60", "react-native@>=0.60.0", "react-native@0.71.3":
   "integrity" "sha512-RYJXCcQGa4NTfKiPgl92eRDUuQ6JGDnHqFEzRwJSqEx9lWvlvRRIebstJfurzPDKLQWQrvITR7aI7e09E25mLw=="

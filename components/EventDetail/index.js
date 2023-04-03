@@ -102,7 +102,7 @@ export default function EventDetail({ navigation, route }) {
                     <Text style={styles.eventDetailLeft}>Video:</Text>
                     <Text style={styles.eventDetailRight}></Text>
                 </View>
-                <VideoView video_url={''} />
+                <VideoView video_url={'https://moctobpltc-i.akamaihd.net/hls/live/571329/eight/playlist.m3u8'} />
 
 
                 <View style={styles.editResponseButton}>

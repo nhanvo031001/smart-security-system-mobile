@@ -12,6 +12,7 @@ import Report from "../Report";
 import Personal from "../Personal";
 import Notifications from "../Notifications";
 import VideoView from "../VideoView";
+import MonitorVideo from "../MonitorVideo";
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -38,6 +39,8 @@ export default function Welcome({ navigation }) {
                         iconName = focused ? "person-outline" : "person-outline";
                     } else if (route.name === "Notifications") {
                         iconName = focused ? "notifications" : "notifications";
+                    } else if (route.name === "MonitorVideo") {
+                        iconName = focused ? "videocam-outline" : "videocam-outline";
                     }
                     return <Ionicons name={iconName} color={color} size={24} />
                 },
@@ -47,13 +50,14 @@ export default function Welcome({ navigation }) {
             })}
         >
             <Tab.Screen name="Dashboard" component={Dashboard} options={{ title: "Dashboard" }} />
+            <Tab.Screen name="MonitorVideo" component={MonitorVideo} options={{ title: "MonitorVideo" }} />
             <Tab.Screen name="Event" component={Event} options={{ title: "Event" }} />
-            <Tab.Screen name="Configuration" component={Configuration} options={{ title: "Configuration" }} />
+            {/* <Tab.Screen name="Configuration" component={Configuration} options={{ title: "Configuration" }} /> */}
             <Tab.Screen name="Report" component={Report} options={{ title: "Report" }} />
             {/*<Tab.Screen name="Profile" component={Report} options={{ title: "Profile" }} />*/}
             <Tab.Screen name="Notifications" component={Notifications} options={{ title: "Notifications" }} />
             <Tab.Screen name="Personal" component={Personal} options={{ title: "Personal" }} />
-            <Tab.Screen name="VideoView" component={VideoView} options={{ title: "VideoView" }} />
+            {/* <Tab.Screen name="VideoView" component={VideoView} options={{ title: "VideoView" }} /> */}
         </Tab.Navigator>
 
     );

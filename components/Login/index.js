@@ -1,16 +1,16 @@
-import {Button, Dimensions, Image, Switch, Text, TextInput, TouchableOpacity, View} from "react-native";
+import { Button, Dimensions, Image, Switch, Text, TextInput, TouchableOpacity, View } from "react-native";
 import '../../styles/appStyles'
-import {appStyles} from "../../styles/appStyles";
+import { appStyles } from "../../styles/appStyles";
 import logo from '../../assets/hcmut.png';
-import {useState} from "react";
+import { useState } from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import {CommonActions} from '@react-navigation/native';
-import {styles} from "./styles";
+import { CommonActions } from '@react-navigation/native';
+import { styles } from "./styles";
 
-const {screenWidth} = Dimensions.get("window").width;
-const {screenHeight} = Dimensions.get("window").height;
+const { screenWidth } = Dimensions.get("window").width;
+const { screenHeight } = Dimensions.get("window").height;
 
-export default function Login({navigation}) {
+export default function Login({ navigation }) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -52,7 +52,7 @@ export default function Login({navigation}) {
     return (
         <View style={appStyles.appContainer}>
             <View style={styles.loginContainer}>
-                <Image source={logo} style={styles.logo}/>
+                <Image source={logo} style={styles.logo} />
 
                 <View style={styles.titleContainer}>
                     <Text style={styles.titleText}>Welcome back.</Text>
@@ -80,21 +80,21 @@ export default function Login({navigation}) {
                     />
 
                     <MaterialCommunityIcons style={styles.displayPasswordIcon} name={rightIcon} size={22}
-                                            color="#232323"
-                                            onPress={handleIconPassword}
+                        color="#232323"
+                        onPress={handleIconPassword}
                     />
                 </View>
 
                 <TouchableOpacity style={styles.forgetPasswordContainer}
-                                  onPress={() => {
-                                      navigation.navigate('LoginForgetPassword')
-                                  }}
+                    onPress={() => {
+                        navigation.navigate('LoginForgetPassword')
+                    }}
                 >
                     <Text style={styles.forgetPasswordText}>Quên mật khẩu?</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.loginButton}
-                                  onPress={handleLogin}
+                    onPress={handleLogin}
                 >
 
                     <View style={styles.loginView}>

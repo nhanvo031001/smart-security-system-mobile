@@ -30,7 +30,7 @@ export default function App() {
                     headerTitleAlign: 'center',
                 })}
             >
-                <Stack.Screen name="Welcome" component={Welcome} options={{ title: 'Smart Security System' }} />
+                <Stack.Screen name="Welcome" component={Welcome} options={{ title: 'Smart Surveillance System' }} />
                 <Stack.Screen name="Event" component={Event} options={{ title: 'Sự kiện' }} />
                 <Stack.Screen name="EventDetail" component={EventDetail} options={{ title: 'Chi tiết sự kiện' }} />
                 <Stack.Screen name="Configuration" component={Configuration} options={{ title: 'Cấu hình' }} />
