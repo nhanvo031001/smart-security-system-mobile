@@ -2,6 +2,8 @@ import { Text, TouchableOpacity, View } from "react-native";
 import '../../styles/appStyles';
 import { styles } from "./styles";
 import { CommonActions } from "@react-navigation/native";
+import { useEffect } from "react";
+import { PokemonAPI } from "../../apis/PokeAPI";
 
 export default function Personal({ navigation }) {
 
@@ -15,6 +17,11 @@ export default function Personal({ navigation }) {
     }
 
 
+    useEffect(() => {
+        PokemonAPI.getPaginated({ limit: 20, offset: 0 }).then((pokemonList) => {
+            console.log("test API pokemonList: ", pokemonList)
+        })
+    }, [])
 
 
     return (
