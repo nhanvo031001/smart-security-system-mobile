@@ -101,6 +101,17 @@ export const styles = StyleSheet.create({
         textAlignVertical: "center"
     },
 
+    confirmStatusDoneButton: {
+        width: '20%',
+        // backgroundColor: "#2196F3",
+        textAlign: "center",
+        alignItems: "center",
+        height: 25,
+        borderRadius: 4,
+        marginRight: 5,
+        textAlignVertical: "center"
+    },
+
     confirmStatusButtonText: {
         color: '#fff',
         fontWeight: "bold",

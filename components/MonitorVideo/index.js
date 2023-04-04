@@ -57,7 +57,7 @@ export default function MonitorVideo({ navigation }) {
             results.push({ building_name, floor_name, camera_name, video_url });
         }
 
-        console.log("result list videos: ", results);
+        // console.log("result list videos: ", results);
         setVideosList(results);
     }
 

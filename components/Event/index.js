@@ -10,11 +10,16 @@ import { styles } from "./styles";
 import { TextInput } from "react-native-paper";
 import { convertDate } from "../../utils/helper/helper";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { useDispatch, useSelector } from "react-redux";
+import { getEventsList } from "../../reducers/eventReducer";
 
 export default function Event({ navigation }) {
     console.log("Event Page")
+
+    const dispatch = useDispatch();
     const [originalData, setOriginalData] = useState([]);
     const [eventsList, setEventsList] = useState([]);
+    const eventsListRedux = useSelector(state => state.event.eventsList);
     const [configurationIOTsList, setConfigurationIOTsList] = useState([]);
     const [devicesList, setDevicesList] = useState([]);
     const [startDate, setStartDate] = useState(new Date());
@@ -24,7 +29,7 @@ export default function Event({ navigation }) {
     // const [showEndDate, setShowEndDate] = useState(false);
     const [showEndDate, setShowEndDate] = useState(Platform.OS == 'ios' ? true : false);
     const FlatListItem = (item, index) => {
-        return <TouchableOpacity onPress={() => navigation.navigate('EventDetail', item, { onCallback: confirmStatusEventCallback })}>
+        return <TouchableOpacity onPress={() => navigation.navigate('EventDetail', item,)}>
             <View style={styles.itemBlock}>
                 <Text style={styles.itemFirst}>{item.event_name}</Text>
                 <Text style={styles.itemSecond}>{item['zone']}</Text>
@@ -80,10 +85,13 @@ export default function Event({ navigation }) {
 
         if (mapperForOriginalData == false) {
             setEventsList(events);
+
+
         } else {
             setOriginalData(events);
         }
 
+        dispatch(getEventsList(events));
         // console.log("events after mapping: ", events)
     }
     const onChangeStartDate = (event, selectedDate) => {
@@ -150,8 +158,7 @@ export default function Event({ navigation }) {
         })
         // console.log("filtering date event: ", currentEventsList);
         setEventsList(currentEventsList);
-    }
-    const confirmStatusEventCallback = (event) => {
+
 
     }
 
@@ -298,7 +305,8 @@ export default function Event({ navigation }) {
 
             <FlatList
                 style={styles.flatListStyle}
-                data={eventsList}
+                // data={eventsList}
+                data={eventsListRedux}
                 renderItem={({ item, index }) => {
                     return (FlatListItem(item, index));
                 }}

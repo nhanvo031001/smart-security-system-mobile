@@ -4,10 +4,14 @@ import { RadioButton } from 'react-native-paper';
 import { useEffect, useState } from "react";
 import ImageModal from "react-native-image-modal";
 import VideoView from "../VideoView";
+import { useDispatch, useSelector } from "react-redux";
+import { updateConfirmStatusEvent } from '../../reducers/eventReducer';
 
 export default function EventDetail({ navigation, route }) {
     // console.log("route params: ", route.params)
     // console.log("function call back: ", navigation.params)
+    const dispatch = useDispatch();
+    const [firstFetch, setFirstFetch] = useState(true);
     const [eventDetailInfoOriginal, setEventDetailInfoOriginal] = useState({});
     const [eventDetailInfo, setEventDetailInfo] = useState({});
     const [trueAlarmRadio, setTrueAlarmRadio] = useState();
@@ -23,13 +27,27 @@ export default function EventDetail({ navigation, route }) {
     const handleChangeResponseComment = (e) => {
         console.log("change comment: ", e);
     }
+    const handleConfirmStatusEvent = (e) => {
+        /* call api update status event */
+        dispatch(updateConfirmStatusEvent({ ...eventDetailInfo, "confirm_status": "done" }))
+        setEventDetailInfo({ ...eventDetailInfo, "confirm_status": "done" })
+        // dispatch(updateConfirmStatusEvent({}));
+        console.log("handle confirm status");
+
+        // setEventDetailInfo({});
+        // setCount(prev => !prev);
+    }
 
 
     useEffect(() => {
-        setEventDetailInfo(route.params);
-        setEventDetailInfoOriginal(route.params);
-        setTrueAlarmRadio(route.params.true_alarm ? 'true' : 'false');
-        setEventComment(route.params.comment);
+        if (firstFetch) {
+            setEventDetailInfo(route.params);
+            setEventDetailInfoOriginal(route.params);
+            setTrueAlarmRadio(route.params.true_alarm ? 'true' : 'false');
+            setEventComment(route.params.comment);
+
+            setFirstFetch(false);
+        }
     }, [route.params, eventDetailInfo])
 
 
@@ -71,9 +89,11 @@ export default function EventDetail({ navigation, route }) {
                     <Text style={styles.confirmStatusText}>Trạng thái:</Text>
                     <Text style={styles.confirmStatusResult}>{eventDetailInfo.confirm_status == "done" ? "Đã xác nhận" : "Chưa xác nhận"}</Text>
                     {eventDetailInfo.confirm_status == "done" ?
-                        ""
+                        <TouchableOpacity disabled onPress={handleConfirmStatusEvent} style={styles.confirmStatusDoneButton}>
+                            {/* <Text style={styles.confirmStatusButtonText}>Xác nhận</Text> */}
+                        </TouchableOpacity>
                         :
-                        <TouchableOpacity style={styles.confirmStatusButton}>
+                        <TouchableOpacity onPress={handleConfirmStatusEvent} style={styles.confirmStatusButton}>
                             <Text style={styles.confirmStatusButtonText}>Xác nhận</Text>
                         </TouchableOpacity>
                     }
