@@ -13,6 +13,7 @@ import Personal from "../Personal";
 import Notifications from "../Notifications";
 import VideoView from "../VideoView";
 import MonitorVideo from "../MonitorVideo";
+import MonitorVideoLineCrossing from "../MonitorVideoLineCrossing";
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -51,6 +52,7 @@ export default function Welcome({ navigation }) {
         >
             <Tab.Screen name="Dashboard" component={Dashboard} options={{ title: "Dashboard" }} />
             <Tab.Screen name="MonitorVideo" component={MonitorVideo} options={{ title: "MonitorVideo" }} />
+            <Tab.Screen name="MonitorVideoLineCrossing" component={MonitorVideoLineCrossing} options={{ title: "MonitorVideoLineCrossing" }} />
             <Tab.Screen name="Event" component={Event} options={{ title: "Event" }} />
             {/* <Tab.Screen name="Configuration" component={Configuration} options={{ title: "Configuration" }} /> */}
             <Tab.Screen name="Report" component={Report} options={{ title: "Report" }} />

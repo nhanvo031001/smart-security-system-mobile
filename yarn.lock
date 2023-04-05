@@ -3194,6 +3194,11 @@
   "resolved" "https://registry.npmjs.org/csstype/-/csstype-3.1.2.tgz"
   "version" "3.1.2"
 
+"ctx-polyfill@^1.1.4":
+  "integrity" "sha512-tz65F3/zmZ2+CMtn4MhNhYi/yIN9dKnItMKzSkH2GE6dBpAIbUR0K5pSHWqUL3OuNBCA70DKlWZYUClHfydIXg=="
+  "resolved" "https://registry.npmjs.org/ctx-polyfill/-/ctx-polyfill-1.1.4.tgz"
+  "version" "1.1.4"
+
 "dag-map@~1.0.0":
   "integrity" "sha512-+LSAiGFwQ9dRnRdOeaj7g47ZFJcOUPukAP8J3A3fuZ1g9Y44BG+P1sgApjLXTQPOzC4+7S9Wr8kXsfpINM4jpw=="
   "resolved" "https://registry.npmjs.org/dag-map/-/dag-map-1.0.2.tgz"
@@ -3530,6 +3535,11 @@
   "integrity" "sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA=="
   "resolved" "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz"
   "version" "4.0.0"
+
+"escape-string-regexp@2.0.0":
+  "integrity" "sha512-UpzcLCXolUWcNu5HtVMHYdXJjArjsF9C0aNnquZYY4uW/Vu0miy5YoWvbV345HauVvcAUnpRuhMMcqTcGOY2+w=="
+  "resolved" "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-2.0.0.tgz"
+  "version" "2.0.0"
 
 "esprima@^4.0.0", "esprima@~4.0.0":
   "integrity" "sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A=="
@@ -4397,7 +4407,7 @@
     "default-gateway" "^4.2.0"
     "ipaddr.js" "^1.9.0"
 
-"invariant@*", "invariant@^2.2.4":
+"invariant@*", "invariant@^2.2.4", "invariant@2.2.4":
   "integrity" "sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA=="
   "resolved" "https://registry.npmjs.org/invariant/-/invariant-2.2.4.tgz"
   "version" "2.2.4"
@@ -6872,6 +6882,13 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz"
   "version" "17.0.2"
 
+"react-native-canvas@^0.1.38":
+  "integrity" "sha512-DjtN921PKoa2liYF8hKq1263xg2o47Bj/1E/+l75GPicT2RV/x/Y1HBrLvFVCR3OO+UslXEC5BtRjfxDoh/Bug=="
+  "resolved" "https://registry.npmjs.org/react-native-canvas/-/react-native-canvas-0.1.38.tgz"
+  "version" "0.1.38"
+  dependencies:
+    "ctx-polyfill" "^1.1.4"
+
 "react-native-chart-kit@^6.12.0":
   "integrity" "sha512-nZLGyCFzZ7zmX0KjYeeSV1HKuPhl1wOMlTAqa0JhlyW62qV/1ZPXHgT8o9s8mkFaGxdqbspOeuaa6I9jUQDgnA=="
   "resolved" "https://registry.npmjs.org/react-native-chart-kit/-/react-native-chart-kit-6.12.0.tgz"
@@ -7039,6 +7056,14 @@
   dependencies:
     "react-native-slider" "^0.11.0"
     "react-native-vector-icons" "^9.2.0"
+
+"react-native-webview@^12.0.1", "react-native-webview@>=5.10.0 || >=6.1.0":
+  "integrity" "sha512-vYO+nR8PuRZMx97Cuuqan5M0E9IoLT1Gh0YIlkXDPGF+OxREe88UpjD9Jgnc5re+DpTgw93LW0RONSGUlilBUw=="
+  "resolved" "https://registry.npmjs.org/react-native-webview/-/react-native-webview-12.0.1.tgz"
+  "version" "12.0.1"
+  dependencies:
+    "escape-string-regexp" "2.0.0"
+    "invariant" "2.2.4"
 
 "react-native@*", "react-native@>= 0.50.0", "react-native@>= 0.59", "react-native@>= 0.64.3", "react-native@>=0.45.0", "react-native@>=0.59", "react-native@>=0.60", "react-native@>=0.60.0", "react-native@0.71.3":
   "integrity" "sha512-RYJXCcQGa4NTfKiPgl92eRDUuQ6JGDnHqFEzRwJSqEx9lWvlvRRIebstJfurzPDKLQWQrvITR7aI7e09E25mLw=="
