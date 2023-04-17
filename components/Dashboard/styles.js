@@ -1,4 +1,4 @@
-import {StyleSheet} from "react-native";
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     threeNumberBlock: {
@@ -98,7 +98,8 @@ export const styles = StyleSheet.create({
         borderColor: "#7875FF",
         borderRadius: 3,
         borderWidth: 2,
-        paddingLeft: 5
+        paddingLeft: 5,
+        fontSize: 12
     },
 
     eventAddress: {

@@ -15,7 +15,7 @@
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
     "@reduxjs/toolkit": "^1.9.3",
-    "axios": "^1.3.4",
+    "axios": "^1.3.5",
     "expo": "~48.0.4",
     "expo-av": "~13.2.1",
     "expo-status-bar": "~1.4.4",
@@ -48,7 +48,8 @@
     "react-native-vector-icons": "^9.2.0",
     "react-native-vlc-media-player": "^1.0.51",
     "react-navigation": "^4.4.4",
-    "react-redux": "^8.0.5"
+    "react-redux": "^8.0.5",
+    "socket.io-client": "^4.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

@@ -1,7 +1,8 @@
 import axios from "axios"
 
 export const api = axios.create({
-    baseURL: "https://pokeapi.co/api/v2",
+    // baseURL: "https://pokeapi.co/api/v2",
+    baseURL: "http://192.168.10.113:3001",
 })
 
 // defining a custom error handler for all APIs
@@ -9,10 +10,10 @@ const errorHandler = (error) => {
     const statusCode = error.response?.status
 
     if (error.code === "ERR_CANCELED") {
-        // notification.error({
-        //     placement: "bottomRight",
-        //     description: "API canceled!",
-        // })
+        notification.error({
+            placement: "bottomRight",
+            description: "API canceled!",
+        })
         return Promise.resolve()
     }
 

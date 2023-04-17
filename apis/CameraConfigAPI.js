@@ -1,9 +1,9 @@
 import { api } from "./configs/axiosConfig";
 
-export const CameraMapAPI = {
+export const CameraConfigAPI = {
     getAll: async function (cancel = false) {
         const response = await api.request({
-            url: ``,
+            url: `/api/cameras`,
             method: "GET",
         })
 
@@ -11,8 +11,8 @@ export const CameraMapAPI = {
     },
 
     update: async function (item, cancel = false) {
-        const response = await api.request({
-            url: ``,
+        const response = await api.request({    
+            url: `/api/cameras/${item._id}`,
             method: "PUT",
             data: item,
         })
@@ -22,7 +22,7 @@ export const CameraMapAPI = {
 
     create: async function (item, cancel = false) {
         const response = await api.request({
-            url: ``,
+            url: `/api/cameras`,
             method: "POST",
             data: item,
         })
@@ -32,7 +32,7 @@ export const CameraMapAPI = {
 
     delete: async function (item, cancel = false) {
         const response = await api.request({
-            url: ``,
+            url: `/api/cameras/${item._id}`,
             method: "DELETE",
             data: item,
         })

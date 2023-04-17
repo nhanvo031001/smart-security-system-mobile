@@ -3,7 +3,7 @@ import { api } from "./configs/axiosConfig";
 export const CameraTypeAPI = {
     getAll: async function (cancel = false) {
         const response = await api.request({
-            url: ``,
+            url: `/api/camera_types`,
             method: "GET",
         })
 
@@ -12,7 +12,7 @@ export const CameraTypeAPI = {
 
     update: async function (item, cancel = false) {
         const response = await api.request({
-            url: ``,
+            url: `/api/camera_types/${item._id}`,
             method: "PUT",
             data: item,
         })
@@ -22,7 +22,7 @@ export const CameraTypeAPI = {
 
     create: async function (item, cancel = false) {
         const response = await api.request({
-            url: ``,
+            url: `/api/camera_types`,
             method: "POST",
             data: item,
         })
@@ -32,7 +32,7 @@ export const CameraTypeAPI = {
 
     delete: async function (item, cancel = false) {
         const response = await api.request({
-            url: ``,
+            url: `/api/camera_types/${item._id}`,
             method: "DELETE",
             data: item,
         })

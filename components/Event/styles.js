@@ -61,6 +61,10 @@ export const styles = StyleSheet.create({
             android: {}
         }),
         paddingRight: 4,
+        paddingTop: 10
+        // display: 'flex',
+        // flexDirection: 'column',
+        // justifyContent: 'space-around'
     },
 
     header: {

@@ -13,11 +13,45 @@ import Personal from "../Personal";
 import Notifications from "../Notifications";
 import VideoView from "../VideoView";
 import MonitorVideo from "../MonitorVideo";
+import { useEffect, useState } from "react";
+import { EventAPI } from "../../apis/EventAPI";
+import { useDispatch, useSelector } from "react-redux";
+import { getEventsList } from "../../reducers/eventReducer";
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
 
 export default function Welcome({ navigation }) {
+
+    const dispatch = useDispatch();
+    const eventsListRedux = useSelector(state => state.event.eventsList);
+    const [eventsList, setEventsList] = useState([]);
+    const [originalData, setOriginalData] = useState([]);
+    const [firstFetch, setFirstFetch] = useState([]);
+
+
+    useEffect(() => {
+        // if (firstFetch) {
+        //     EventAPI.getAll().then(res => {
+        //         console.log("eventst list WELCOME: ", res.data.events);
+        //         setEventsList(res.data.events);
+        //         setOriginalData(res.data.events);
+        //     }).catch(err => {
+        //         console.log("error: ", err);
+        //     })
+
+        //     setFirstFetch(false);
+        // }
+
+        EventAPI.getAll().then(res => {
+            console.log("eventst list WELCOME: ", res.data.events);
+            dispatch(getEventsList(res.data.events))
+            setEventsList(res.data.events);
+            setOriginalData(res.data.events);
+        }).catch(err => {
+            console.log("error: ", err);
+        })
+    }, [])
 
     return (
         <Tab.Navigator
@@ -49,7 +83,7 @@ export default function Welcome({ navigation }) {
                 tabBarInactiveTintColor: 'grey',
             })}
         >
-            <Tab.Screen name="Dashboard" component={Dashboard} options={{ title: "Dashboard" }} />
+            <Tab.Screen name="Dashboard" component={Dashboard} options={{ title: "Dashboard" }} initialParams={{ eventsList: eventsList }} />
             <Tab.Screen name="MonitorVideo" component={MonitorVideo} options={{ title: "MonitorVideo" }} />
             <Tab.Screen name="Event" component={Event} options={{ title: "Event" }} />
             {/* <Tab.Screen name="Configuration" component={Configuration} options={{ title: "Configuration" }} /> */}

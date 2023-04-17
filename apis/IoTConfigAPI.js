@@ -3,7 +3,7 @@ import { api } from "./configs/axiosConfig";
 export const IoTConfigAPI = {
     getAll: async function (cancel = false) {
         const response = await api.request({
-            url: ``,
+            url: `/api/iot_devices`,
             method: "GET",
         })
 
@@ -12,7 +12,7 @@ export const IoTConfigAPI = {
 
     update: async function (item, cancel = false) {
         const response = await api.request({
-            url: ``,
+            url: `/api/iot_devices/${item._id}`,
             method: "PUT",
             data: item,
         })
@@ -22,7 +22,7 @@ export const IoTConfigAPI = {
 
     create: async function (item, cancel = false) {
         const response = await api.request({
-            url: ``,
+            url: `/api/iot_devices`,
             method: "POST",
             data: item,
         })
@@ -32,7 +32,7 @@ export const IoTConfigAPI = {
 
     delete: async function (item, cancel = false) {
         const response = await api.request({
-            url: ``,
+            url: `/api/iot_devices/${item._id}`,
             method: "DELETE",
             data: item,
         })

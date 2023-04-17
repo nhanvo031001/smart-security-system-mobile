@@ -3,7 +3,7 @@ import { api } from "./configs/axiosConfig";
 export const EventAPI = {
     getAll: async function (cancel = false) {
         const response = await api.request({
-            url: ``,
+            url: `/api/events`,
             method: "GET",
         })
 

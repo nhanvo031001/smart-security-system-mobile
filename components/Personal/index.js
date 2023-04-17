@@ -18,9 +18,9 @@ export default function Personal({ navigation }) {
 
 
     useEffect(() => {
-        PokemonAPI.getPaginated({ limit: 20, offset: 0 }).then((pokemonList) => {
-            console.log("test API pokemonList: ", pokemonList)
-        })
+        // PokemonAPI.getPaginated({ limit: 20, offset: 0 }).then((pokemonList) => {
+        //     console.log("test API pokemonList: ", pokemonList)
+        // })
     }, [])
 
 

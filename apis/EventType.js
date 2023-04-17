@@ -1,9 +1,11 @@
 import { api } from "./configs/axiosConfig";
+import { BASE_URL } from "../constants/server";
+
 
 export const EventTypeAPI = {
     getAll: async function (cancel = false) {
         const response = await api.request({
-            url: ``,
+            url: `/api/event_types`,
             method: "GET",
         })
 
@@ -12,7 +14,7 @@ export const EventTypeAPI = {
 
     update: async function (item, cancel = false) {
         const response = await api.request({
-            url: ``,
+            url: `/api/event_types/${item._id}`,
             method: "PUT",
             data: item,
         })
@@ -22,7 +24,7 @@ export const EventTypeAPI = {
 
     create: async function (item, cancel = false) {
         const response = await api.request({
-            url: ``,
+            url: `/api/event_types`,
             method: "POST",
             data: item,
         })
@@ -32,7 +34,7 @@ export const EventTypeAPI = {
 
     delete: async function (item, cancel = false) {
         const response = await api.request({
-            url: ``,
+            url: `/api/event_types/${item._id}`,
             method: "DELETE",
             data: item,
         })
