@@ -16,7 +16,7 @@ import MonitorVideo from "../MonitorVideo";
 import { useEffect, useState } from "react";
 import { EventAPI } from "../../apis/EventAPI";
 import { useDispatch, useSelector } from "react-redux";
-import { getEventsList } from "../../reducers/eventReducer";
+import { getEventsList, updateOriginalEventsList } from "../../reducers/eventReducer";
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -25,10 +25,36 @@ export default function Welcome({ navigation }) {
 
     const dispatch = useDispatch();
     const eventsListRedux = useSelector(state => state.event.eventsList);
+    const originalEventsListRedux = useSelector(state => state.event.originalEventsList);
     const [eventsList, setEventsList] = useState([]);
     const [originalData, setOriginalData] = useState([]);
     const [firstFetch, setFirstFetch] = useState([]);
+    const handleSearchEventsListCallback = () => {
+        console.log(convertDate(startDate))
+        console.log(convertDate(endDate))
+        let startDateObject = Date.parse(convertDate(startDate));
+        let endDateObject = Date.parse(convertDate(endDate));
 
+        // set events list
+        // let currentEventsList = eventsList;
+        let currentEventsList = originalEventsListRedux;
+        // console.log("currentEventsList WELCOME: ", currentEventsList);
+        currentEventsList = currentEventsList.filter((event, index) => {
+            let date = event.created_at.substring(0, event.created_at.indexOf(','));
+            let dateSplit = date.split('/');
+            let dd = Platform.OS == 'ios' ? (dateSplit[0].length == 1 ? '0' + dateSplit[0] : dateSplit[0]) : (dateSplit[1].length == 1 ? '0' + dateSplit[1] : dateSplit[1]);
+            let mm = Platform.OS == 'ios' ? (dateSplit[1].length == 1 ? '0' + dateSplit[1] : dateSplit[1]) : (dateSplit[0].length == 1 ? '0' + dateSplit[0] : dateSplit[0]);
+            let yyyy = dateSplit[2];
+            let eventDate = yyyy + '-' + mm + '-' + dd;
+            console.log("event date: ", eventDate)
+            let eventDateObject = Date.parse(eventDate);
+            if (startDateObject <= eventDateObject && eventDateObject <= endDateObject) {
+                return event;
+            }
+        })
+        console.log("filtering date event: ", currentEventsList);
+        // setEventsList(currentEventsList);
+    }
 
     useEffect(() => {
         // if (firstFetch) {
@@ -45,7 +71,8 @@ export default function Welcome({ navigation }) {
 
         EventAPI.getAll().then(res => {
             console.log("eventst list WELCOME: ", res.data.events);
-            dispatch(getEventsList(res.data.events))
+            dispatch(getEventsList(res.data.events));
+            dispatch(updateOriginalEventsList(res.data.events));
             setEventsList(res.data.events);
             setOriginalData(res.data.events);
         }).catch(err => {

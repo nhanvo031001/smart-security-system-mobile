@@ -1,4 +1,4 @@
-import {Dimensions, StyleSheet} from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
         paddingTop: 7,
     },
 
-    processedEventsNumber:{
+    processedEventsNumber: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -106,7 +106,7 @@ export const styles = StyleSheet.create({
         paddingTop: 7,
     },
 
-    falseAlarmNumber:{
+    falseAlarmNumber: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -116,5 +116,14 @@ export const styles = StyleSheet.create({
         color: "#DDDDDD",
     },
 
-    
+    chartConfig: {
+        backgroundGradientFrom: "#1E2923",
+        backgroundGradientFromOpacity: 21,
+        backgroundGradientTo: "#08130D",
+        backgroundGradientToOpacity: 0.5,
+        color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+        strokeWidth: 2, // optional, default 3
+        barPercentage: 0.5,
+        useShadowColorFromDataset: false // optional
+    }
 });

@@ -2,12 +2,22 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     eventsList: [],
+    originalEventsList: [],
 }
 
 const eventSlice = createSlice({
     name: 'event',
     initialState,
     reducers: {
+        getOriginalEventsList(state, action) {
+            return state.originalEventsList;
+        },
+
+        updateOriginalEventsList(state, action) {
+            const newOriginalEventsList = action.payload;
+            state.originalEventsList = newOriginalEventsList;
+        },
+
         getEventsList(state, action) {
             const newEventsList = action.payload;
             state.eventsList = newEventsList;
@@ -31,6 +41,8 @@ const eventSlice = createSlice({
 export const {
     getEventsList,
     updateConfirmStatusEvent,
+    getOriginalEventsList,
+    updateOriginalEventsList,
 }
     = eventSlice.actions;
 

@@ -23,19 +23,20 @@ import { FloorAPI } from "../../apis/FloorAPI";
 import { mapperListIOTTypeFromDatabaseToFE, mapperIOTConfigListFromDatabaseToFE, mapperListAreaFromDatabaseToFE, mapperListBuildingFromDatabaseToFE, mapperListCameraConfigurationFromDatabaseToFE, mapperListDeviceFromDatabaseToFE, mapperListFloorFromDatabaseToFE, mapperEventDetailFromDatabaseToFE, mapperListEventDetailFromDatabaseToFE } from "../../utils/mapper/configuration";
 import { EventTypeAPI } from "../../apis/EventType";
 import { useDispatch, useSelector } from "react-redux";
-// import { latest } from "immer/dist/internal";
+
 
 export default function Event({ navigation }) {
     console.log("Event Page")
 
     const dispatch = useDispatch();
     const eventsListRedux = useSelector(state => state.event.eventsList);
+    const originalEventsListRedux = useSelector(state => state.event.originalEventsList);
     let eventsList = eventsListRedux;
     const [originalData, setOriginalData] = useState([]);
     // const [eventsList, setEventsList] = useState([]);
     // const eventsListRedux = useSelector(state => state.event.eventsList);
-    const [configurationIOTsList, setConfigurationIOTsList] = useState([]);
-    const [devicesList, setDevicesList] = useState([]);
+    // const [configurationIOTsList, setConfigurationIOTsList] = useState([]);
+    // const [devicesList, setDevicesList] = useState([]);
     const [startDate, setStartDate] = useState(new Date());
     // const [showStartDate, setShowStartDate] = useState(false);
     const [showStartDate, setShowStartDate] = useState(Platform.OS == 'ios' ? true : false);
@@ -48,18 +49,14 @@ export default function Event({ navigation }) {
     const [buidingsList, setBuildingsList] = useState([]);
     const [totalIotTypesInfo, setTotalIotTypesInfo] = useState([]);
     const [eventsForFlatList, setEventsForFlatList] = useState([]);
+    const [iotConfigurations, setIotConfigurations] = useState([]);
+    const [eventTypes, setEventTypes] = useState([]);
     const FlatListItem = (item, index) => {
         return <TouchableOpacity onPress={() => navigation.navigate('EventDetail', item,)}>
             <View style={styles.itemBlock}>
                 <Text style={styles.itemFirst}>{item.event_name}</Text>
                 <Text style={styles.itemSecond}>{item['zone']}</Text>
-                {/* <Text style={styles.itemThird}>
-                    <Text> {item.created_at}</Text>
-                </Text> */}
-
                 <View style={styles.itemThird}>
-                    {/* <Text> {new Date(item.created_at).toLocaleDateString()}</Text>
-                    <Text> {new Date(item.created_at).toLocaleTimeString('vi-VN')}</Text> */}
                     <Text> {item.created_at.split("T")[0]} </Text>
                     <Text> {item.created_at.split("T")[1]} </Text>
                 </View>
@@ -75,54 +72,7 @@ export default function Event({ navigation }) {
             </View>
         )
     }
-    // const mapperEvents = (events, mapperForOriginalData) => {
-    //     events = events.map((ele, key) => {
-    //         let zone = ele['zone'];
 
-    //         let event_name = '', device_name = '', address = '', id_iot_config = '';
-    //         for (let i = 0; i < dataIOTDevicesConfig.length; i++) {
-    //             if (zone == dataIOTDevicesConfig[i]['zone']) {
-    //                 // event_name = dataIOTDevicesConfig[i].event_name;
-    //                 // device_name = dataIOTDevicesConfig[i].name;
-    //                 // id_iot_config = dataIOTDevicesConfig[i].id;
-    //                 // break;
-
-    //                 let connect_event_type = dataIOTDevicesConfig[i]['connect_event_type'];
-    //                 for (let j = 0; j < dataEventsType.length; j++) {
-    //                     if (dataEventsType[j].id == connect_event_type) {
-    //                         event_name = dataEventsType[j].event_name;
-    //                         break;
-    //                     }
-    //                 }
-    //                 device_name = dataIOTDevicesConfig[i].name;
-    //                 id_iot_config = dataIOTDevicesConfig[i].id;
-    //                 break;
-    //             }
-    //         }
-
-    //         let dataDevices = iotDevices.concat(cameraDevices);
-    //         for (let i = 0; i < dataDevices.length; i++) {
-    //             if (dataDevices[i].type == 'iot' && dataDevices[i].connect_iot == id_iot_config) {
-    //                 address = dataDevices[i].address;
-    //                 break;
-    //             }
-    //         }
-
-    //         let created_at = new Date(ele.created_at).toLocaleString();
-    //         return { ...ele, event_name, device_name, address, created_at, zone: zone, key: zone }
-    //     })
-
-    //     if (mapperForOriginalData == false) {
-    //         setEventsList(events);
-
-
-    //     } else {
-    //         setOriginalData(events);
-    //     }
-
-    //     dispatch(getEventsList(events));
-    //     // console.log("events after mapping: ", events)
-    // }
     const onChangeStartDate = (event, selectedDate) => {
         if (event.type == "dismissed") {
             // setShowStartDate(false);
@@ -160,8 +110,16 @@ export default function Event({ navigation }) {
     const handleResetEventsList = () => {
         setStartDate(new Date());
         setEndDate(new Date());
-        setEventsList(originalData);
+        // setEventsList(originalData);
         // mapperEvents(originalData)
+
+        let currentEventsList = originalEventsListRedux;
+        let mapperEvents = mapperListEventDetailFromDatabaseToFE(currentEventsList, iotConfigurations);
+        mapperRecentEvents(mapperEvents, iotConfigurations, eventTypes, iotDevices, cameraDevices);
+    }
+    const helperDateISO = (date) => {
+        let convertDate = new Date(date).toISOString();
+        return convertDate.split('T')[0];
     }
     const handleSearchEventsList = () => {
         console.log(convertDate(startDate))
@@ -171,40 +129,46 @@ export default function Event({ navigation }) {
 
         // set events list
         // let currentEventsList = eventsList;
-        let currentEventsList = originalData;
+        let currentEventsList = originalEventsListRedux;
+        // console.log("currentEventsList EVENT: ", currentEventsList)
         currentEventsList = currentEventsList.filter((event, index) => {
-            let date = event.created_at.substring(0, event.created_at.indexOf(','));
-            let dateSplit = date.split('/');
-            let dd = Platform.OS == 'ios' ? (dateSplit[0].length == 1 ? '0' + dateSplit[0] : dateSplit[0]) : (dateSplit[1].length == 1 ? '0' + dateSplit[1] : dateSplit[1]);
-            let mm = Platform.OS == 'ios' ? (dateSplit[1].length == 1 ? '0' + dateSplit[1] : dateSplit[1]) : (dateSplit[0].length == 1 ? '0' + dateSplit[0] : dateSplit[0]);
-            let yyyy = dateSplit[2];
-            let eventDate = yyyy + '-' + mm + '-' + dd;
-            // console.log(event["zone"], eventDate)
-            let eventDateObject = Date.parse(eventDate);
+
+            let convertedCreatedAt = helperDateISO(event.created_at);
+            let eventDateObject = Date.parse(convertedCreatedAt);
             if (startDateObject <= eventDateObject && eventDateObject <= endDateObject) {
                 return event;
             }
+
+            // console.log("event date: ", new Date(event.created_at).toISOString())
+            // let date = event.created_at.substring(0, event.created_at.indexOf(','));
+            // let dateSplit = date.split('/');
+            // let dd = Platform.OS == 'ios' ? (dateSplit[0].length == 1 ? '0' + dateSplit[0] : dateSplit[0]) : (dateSplit[1].length == 1 ? '0' + dateSplit[1] : dateSplit[1]);
+            // let mm = Platform.OS == 'ios' ? (dateSplit[1].length == 1 ? '0' + dateSplit[1] : dateSplit[1]) : (dateSplit[0].length == 1 ? '0' + dateSplit[0] : dateSplit[0]);
+            // let yyyy = dateSplit[2];
+            // let eventDate = yyyy + '-' + mm + '-' + dd;
+            // // console.log("event date: ", eventDate)
+            // let eventDateObject = Date.parse(eventDate);
+            // if (startDateObject <= eventDateObject && eventDateObject <= endDateObject) {
+            //     return event;
+            // }
         })
+        // console.log("filtering date event: ", currentEventsList.length);
         // console.log("filtering date event: ", currentEventsList);
-        setEventsList(currentEventsList);
+
+        let mapperEvents = mapperListEventDetailFromDatabaseToFE(currentEventsList, iotConfigurations);
+        mapperRecentEvents(mapperEvents, iotConfigurations, eventTypes, iotDevices, cameraDevices);
+
+        // setEventsList(currentEventsList);
     }
     const mapperRecentEvents = (events, iotConfigs = [], eventTypes, iotMaps, cameraMaps) => {
-        // console.log("events DASHBOARD: ", events)
         let devicesList = iotMaps.concat(cameraMaps);
-        // console.log("devices list mapper recent event:", iotMaps, cameraMaps)
         let latestEvents = [];
-        // console.log("mapper recent events: ", eventTypes)
         for (let i = 0; i < events.length; i++) {
             // console.log("events[i]: ", events[i])
             let zone = events[i]['zone'];
             let event_name = '', device_name = '', address = '', id_iot_config = '';
             for (let i = 0; i < iotConfigs.length; i++) {
                 if (zone == iotConfigs[i]['zone']) {
-                    // event_name = dataIotDevices[i].event_name;
-                    // device_name = dataIotDevices[i].name;
-                    // id_iot_config = dataIotDevices[i].id;
-                    // break;
-
                     let connect_event_type = iotConfigs[i]['connect_event_type'];
                     for (let j = 0; j < eventTypes.length; j++) {
                         if (eventTypes[j].id == connect_event_type || eventTypes[j]._id == connect_event_type) {
@@ -226,7 +190,6 @@ export default function Event({ navigation }) {
             }
 
             let created_at = new Date(events[i].created_at).toISOString();
-            // let created_at = (events[i].created_at);
             latestEvents.push({
                 ...events[i],
                 event_name,
@@ -235,16 +198,11 @@ export default function Event({ navigation }) {
                 created_at,
                 // zone: zone,
                 key: events[i].id,
-                // video_url: 'https://caodang.fpt.edu.vn/wp-content/uploads/react-native.jpg'
                 video_url: events[i].detection_image_url ? events[i].detection_image_url : 'https://www.datasciencecentral.com/wp-content/uploads/2021/10/9712908078.jpeg'
             })
         }
 
-        // console.log("mapper event event: ", latestEvents)
-        // setRecentEvents(latestEvents);
-        // setEventsList(latestEvents);
         setEventsForFlatList(latestEvents);
-        // console.log("latestEvents: ", latestEvents)
     }
     const mapperIotTypes = (iotTypes, iotDevicesConfig) => {
         let iotTypeInfo = [];
@@ -255,11 +213,9 @@ export default function Event({ navigation }) {
                     iotDevicesOfType.push(iotDevicesConfig[j]);
                 }
             }
-            // console.log("type ", iotTypes[i].id, ": ", iotDevicesOfType)
             iotTypeInfo.push({ "size": iotDevicesOfType.length, "iot_type_name": iotTypes[i].iot_type_name, "image_url": iotTypes[i].image_url });
         }
 
-        // console.log("iotTypeInfo: ", iotTypeInfo)
         setTotalIotTypesInfo(iotTypeInfo);
     }
 
@@ -320,6 +276,8 @@ export default function Event({ navigation }) {
                                                 setBuildingsList(mapperBuildings);
                                                 setIotDevices(mapperIoTMaps);           // map
                                                 setCameraDevices(mapperCameraMaps);     // map
+                                                setEventTypes(eventTypes);
+                                                setIotConfigurations(mapperIoTConfigs);
                                                 // setSeries(newSeries);
                                                 // setMarkers(mapperAreas);
                                                 // console.log("mapperDevices dashboard: ", mapperIoTMaps, mapperCameraMaps)
@@ -352,14 +310,6 @@ export default function Event({ navigation }) {
 
             <View style={styles.startDateContainer}>
                 <Text style={styles.startDate}>Ngày bắt đầu: </Text>
-                {/*<TextInput*/}
-                {/*    style={{marginLeft: 10, width: 160, backgroundColor: "green"}}*/}
-                {/*    disabled={true}*/}
-                {/*    right={<TextInput.Icon style={{width: 40}} name='password' onPress={() => {*/}
-                {/*        setShowStartDate(true)*/}
-                {/*    }}/>}*/}
-                {/*    value={startDate.getDate() + "/" + (parseInt(startDate.getMonth()) + 1).toString() + "/" + startDate.getFullYear()}*/}
-                {/*/>*/}
 
                 {Platform.OS == 'ios' ?
                     ''
@@ -395,15 +345,6 @@ export default function Event({ navigation }) {
 
             <View style={styles.endDateContainer}>
                 <Text style={styles.endDate}>Ngày kết thúc: </Text>
-                {/*<TextInput*/}
-                {/*    style={{marginLeft: 10, width: 170}}*/}
-                {/*    disabled={true}*/}
-                {/*    right={<TextInput.Icon name='password' onPress={() => {*/}
-                {/*        setShowEndDate(true)*/}
-                {/*    }}/>}*/}
-                {/*    value={endDate.getDate() + "/" + (parseInt(endDate.getMonth()) + 1).toString() + "/" + endDate.getFullYear()}*/}
-                {/*/>*/}
-
 
                 {Platform.OS == 'ios' ?
                     ''
@@ -424,14 +365,6 @@ export default function Event({ navigation }) {
                         />
                     </View>
 
-                    // <TextInput
-                    //     style={styles.endDateInput}
-                    //     disabled={true}
-                    //     right={<TextInput.Icon name='password' onPress={() => {
-                    //         setShowEndDate(true)
-                    //     }}/>}
-                    //     value={endDate.getDate() + "/" + (parseInt(endDate.getMonth()) + 1).toString() + "/" + endDate.getFullYear()}
-                    // />
                 }
 
 
@@ -446,15 +379,6 @@ export default function Event({ navigation }) {
                 />}
 
             </View>
-
-            {/*<View style={styles.searchButtonView}>*/}
-            {/*    <Button style={styles.searchButton} color="rgb(33, 150, 243)" title='Tìm kiếm' onPress={handleSearchEventsList}/>*/}
-            {/*</View>*/}
-
-            {/*<View style={styles.resetButtonView}>*/}
-            {/*    <Button title='Reset' onPress={handleResetEventsList}/>*/}
-            {/*</View>*/}
-
 
             <View style={styles.containerSearchAndButton}>
 

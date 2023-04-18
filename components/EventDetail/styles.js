@@ -46,6 +46,8 @@ export const styles = StyleSheet.create({
         // backgroundColor: 'yellow'
         backgroundColor: "white",
         marginBottom: 30,
+        height: 80,
+        width: '100%',
     },
 
     commentConfirmCancelButton: {

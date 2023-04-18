@@ -45,6 +45,7 @@ export default function EventDetail({ navigation, route }) {
             setEventDetailInfoOriginal(route.params);
             setTrueAlarmRadio(route.params.true_alarm ? 'true' : 'false');
             setEventComment(route.params.comment);
+            console.log("comment of event: ", route.params.comment)
 
             setFirstFetch(false);
         }
@@ -155,7 +156,7 @@ export default function EventDetail({ navigation, route }) {
                     editable={!disabledResponse}
                     multiline
                     numberOfLines={4}
-                    maxLength={40}
+                    maxLength={60}
                     onChangeText={text => setEventComment(text)}
                     value={eventComment}
                     style={styles.commentInputArea}
