@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import ImageModal from "react-native-image-modal";
 import VideoView from "../VideoView";
 import { useDispatch, useSelector } from "react-redux";
-import { updateConfirmStatusEvent } from '../../reducers/eventReducer';
+import { updateCommentEvent, updateConfirmStatusEvent } from '../../reducers/eventReducer';
 
 export default function EventDetail({ navigation, route }) {
     // console.log("route params: ", route.params)
@@ -18,6 +18,11 @@ export default function EventDetail({ navigation, route }) {
     const [disabledResponse, setDisabledResponse] = useState(true);
     const [eventComment, setEventComment] = useState('');
     const handleConfirmEditResponse = (e) => {
+        /* call API to confirm comment of event */
+
+        dispatch(updateCommentEvent({ ...eventDetailInfo, "comment": eventComment }));
+        setEventDetailInfo({ ...eventDetailInfo, "comment": eventComment });
+
         setDisabledResponse(!disabledResponse);
     }
     const handleCancelEditResponse = (e) => {
@@ -29,8 +34,17 @@ export default function EventDetail({ navigation, route }) {
     }
     const handleConfirmStatusEvent = (e) => {
         /* call api update status event */
-        dispatch(updateConfirmStatusEvent({ ...eventDetailInfo, "confirm_status": "done" }))
-        setEventDetailInfo({ ...eventDetailInfo, "confirm_status": "done" })
+
+
+        // dispatch(updateConfirmStatusEvent({ ...eventDetailInfo, "confirm_status": "done" }))
+        // setEventDetailInfo({ ...eventDetailInfo, "confirm_status": "done" })
+
+        // dispatch(updateConfirmStatusEvent({ ...eventDetailInfo, "confirm_status": "human_verified" }));
+        // setEventDetailInfo({ ...eventDetailInfo, "confirm_status": "human_verified" });
+
+        dispatch(updateConfirmStatusEvent({ ...eventDetailInfo, "event_status": "human_verified" }));
+        setEventDetailInfo({ ...eventDetailInfo, "event_status": "human_verified" });
+
         // dispatch(updateConfirmStatusEvent({}));
         console.log("handle confirm status");
 
@@ -43,9 +57,10 @@ export default function EventDetail({ navigation, route }) {
         if (firstFetch) {
             setEventDetailInfo(route.params);
             setEventDetailInfoOriginal(route.params);
-            setTrueAlarmRadio(route.params.true_alarm ? 'true' : 'false');
+            // setTrueAlarmRadio(route.params.true_alarm ? 'true' : 'false');
+            setTrueAlarmRadio(route.params.human_true_alarm ? 'true' : 'false');
             setEventComment(route.params.comment);
-            console.log("comment of event: ", route.params.comment)
+            // console.log("comment of event: ", route.params.comment)
 
             setFirstFetch(false);
         }
@@ -88,8 +103,8 @@ export default function EventDetail({ navigation, route }) {
                 {/* <View style={styles.eventDetailBlock}> */}
                 <View style={styles.confirmStatusBlock}>
                     <Text style={styles.confirmStatusText}>Trạng thái:</Text>
-                    <Text style={styles.confirmStatusResult}>{eventDetailInfo.confirm_status == "done" ? "Đã xác nhận" : "Chưa xác nhận"}</Text>
-                    {eventDetailInfo.confirm_status == "done" ?
+                    <Text style={styles.confirmStatusResult}>{eventDetailInfo.event_status == "human_verified" ? "Đã xác nhận" : "Chưa xác nhận"}</Text>
+                    {eventDetailInfo.event_status == "human_verified" ?
                         <TouchableOpacity disabled onPress={handleConfirmStatusEvent} style={styles.confirmStatusDoneButton}>
                             {/* <Text style={styles.confirmStatusButtonText}>Xác nhận</Text> */}
                         </TouchableOpacity>

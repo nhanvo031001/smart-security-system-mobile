@@ -1,6 +1,6 @@
-export const mapperEventsUtils = (items, iotConfigs, eventTypes, iotMaps, cameraMaps, areas, buildings, floors, iotTypes) => {
+export const mapperEventsUtils = (items, iotConfigs, eventTypes, iotMaps, cameraMaps, areas, buildings, floors, iotTypes, endIdx = 0) => {
     // console.log("data passed to MONITOR: ", items, iotConfigs, eventTypes, iotMaps, cameraMaps, areas, buildings, floors, iotTypes)
-    return items.map(event => {
+    return items.slice(0, endIdx).map(event => {
 
         let iot_config_name = '', iot_map_name = '', area_id = '', area_name = '', building_name = '', floor_name = '', address = '', iot_type_id = '', iot_type_name = '', event_type_id = '', event_name = '', area_obj = {}, building_id = '', floor_level = ''
         for (let i = 0; i < iotConfigs.length; i++) {

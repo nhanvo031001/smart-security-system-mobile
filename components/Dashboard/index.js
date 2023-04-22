@@ -3,12 +3,12 @@ import { appStyles } from "../../styles/appStyles";
 import { PieChart, ProgressChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 import { useEffect, useState } from "react";
-import dataEvents from '../../utils/dummyData/eventList.json';
-import dataIOTDevicesConfig from '../../utils/dummyData/managementIOTDeviceConfig.json';
-import iotDevices from '../../utils/dummyData/managementCameraDevice.json';
-import cameraDevices from '../../utils/dummyData/managementIOTDevice.json';
-import dataBuildings from '../../utils/dummyData/managementBuilding.json';
-import dataEventsType from '../../utils/dummyData/configurationEventType.json';
+// import dataEvents from '../../utils/dummyData/eventList.json';
+// import dataIOTDevicesConfig from '../../utils/dummyData/managementIOTDeviceConfig.json';
+// import iotDevices from '../../utils/dummyData/managementCameraDevice.json';
+// import cameraDevices from '../../utils/dummyData/managementIOTDevice.json';
+// import dataBuildings from '../../utils/dummyData/managementBuilding.json';
+// import dataEventsType from '../../utils/dummyData/configurationEventType.json';
 import ImageModal from 'react-native-image-modal';
 import { styles } from "./styles";
 import { BuildingAPI } from "../../apis/BuildingAPI";
@@ -45,7 +45,7 @@ export default function Dashboard({ route, navigation }) {
     const [iotDevices, setIotDevices] = useState([]);           // map
     const [cameraDevices, setCameraDevices] = useState([]);     // map
     const [areasList, setAreasList] = useState([]);
-    const [totalIotTypesInfo, setTotalIotTypesInfo] = useState([]);
+    // const [totalIotTypesInfo, setTotalIotTypesInfo] = useState([]);
     // const mapperRecentEvents = (events) => {
     //     // console.log("mapperRecentEvents: ", events)
     //     let devicesList = iotDevices.concat(cameraDevices);
@@ -96,60 +96,60 @@ export default function Dashboard({ route, navigation }) {
     //     console.log("mapper event dashboard: ", latestEvents)
     //     setRecentEvents(latestEvents);
     // }
-    const mapperRecentEvents = (events, iotConfigs = [], eventTypes, iotMaps, cameraMaps) => {
-        // console.log("events DASHBOARD: ", events)
-        let devicesList = iotMaps.concat(cameraMaps);
-        // console.log("devices list mapper recent event:", iotMaps, cameraMaps)
-        let latestEvents = [];
-        for (let i = 0; i < 3 && i < events.length; i++) {
-            // console.log("events[i]: ", events[i])
-            let zone = events[i]['zone'];
-            let event_name = '', device_name = '', address = '', id_iot_config = '';
-            for (let i = 0; i < iotConfigs.length; i++) {
-                if (zone == iotConfigs[i]['zone']) {
-                    // event_name = dataIotDevices[i].event_name;
-                    // device_name = dataIotDevices[i].name;
-                    // id_iot_config = dataIotDevices[i].id;
-                    // break;
+    // const mapperRecentEvents = (events, iotConfigs = [], eventTypes, iotMaps, cameraMaps) => {
+    //     // console.log("events DASHBOARD: ", events)
+    //     let devicesList = iotMaps.concat(cameraMaps);
+    //     // console.log("devices list mapper recent event:", iotMaps, cameraMaps)
+    //     let latestEvents = [];
+    //     for (let i = 0; i < 3 && i < events.length; i++) {
+    //         // console.log("events[i]: ", events[i])
+    //         let zone = events[i]['zone'];
+    //         let event_name = '', device_name = '', address = '', id_iot_config = '';
+    //         for (let i = 0; i < iotConfigs.length; i++) {
+    //             if (zone == iotConfigs[i]['zone']) {
+    //                 // event_name = dataIotDevices[i].event_name;
+    //                 // device_name = dataIotDevices[i].name;
+    //                 // id_iot_config = dataIotDevices[i].id;
+    //                 // break;
 
-                    let connect_event_type = iotConfigs[i]['connect_event_type'];
-                    for (let j = 0; j < eventTypes.length; j++) {
-                        if (eventTypes[j].id == connect_event_type || eventTypes[j]._id == connect_event_type) {
-                            event_name = eventTypes[j].event_name;
-                            break;
-                        }
-                    }
-                    device_name = iotConfigs[i].name;
-                    id_iot_config = iotConfigs[i].id;
-                    break;
-                }
-            }
+    //                 let connect_event_type = iotConfigs[i]['connect_event_type'];
+    //                 for (let j = 0; j < eventTypes.length; j++) {
+    //                     if (eventTypes[j].id == connect_event_type || eventTypes[j]._id == connect_event_type) {
+    //                         event_name = eventTypes[j].event_name;
+    //                         break;
+    //                     }
+    //                 }
+    //                 device_name = iotConfigs[i].name;
+    //                 id_iot_config = iotConfigs[i].id;
+    //                 break;
+    //             }
+    //         }
 
-            for (let i = 0; i < devicesList.length; i++) {
-                if (devicesList[i].type == 'iot' && devicesList[i].connect_iot == id_iot_config) {
-                    address = devicesList[i].address;
-                    break;
-                }
-            }
+    //         for (let i = 0; i < devicesList.length; i++) {
+    //             if (devicesList[i].type == 'iot' && devicesList[i].connect_iot == id_iot_config) {
+    //                 address = devicesList[i].address;
+    //                 break;
+    //             }
+    //         }
 
-            let created_at = new Date(events[i].created_at).toISOString();
-            latestEvents.push({
-                ...events[i],
-                event_name,
-                device_name,
-                address,
-                created_at,
-                // zone: zone,
-                key: events[i].id,
-                // video_url: 'https://caodang.fpt.edu.vn/wp-content/uploads/react-native.jpg'
-                video_url: events[i].detection_image_url ? events[i].detection_image_url : 'https://www.datasciencecentral.com/wp-content/uploads/2021/10/9712908078.jpeg'
-            })
-        }
+    //         let created_at = new Date(events[i].created_at).toISOString();
+    //         latestEvents.push({
+    //             ...events[i],
+    //             event_name,
+    //             device_name,
+    //             address,
+    //             created_at,
+    //             // zone: zone,
+    //             key: events[i].id,
+    //             // video_url: 'https://caodang.fpt.edu.vn/wp-content/uploads/react-native.jpg'
+    //             video_url: events[i].detection_image_url ? events[i].detection_image_url : 'https://www.datasciencecentral.com/wp-content/uploads/2021/10/9712908078.jpeg'
+    //         })
+    //     }
 
-        // console.log("mapper event dashboard: ", latestEvents)
-        setRecentEvents(latestEvents);
-        // console.log("latestEvents: ", latestEvents)
-    }
+    //     // console.log("mapper event dashboard: ", latestEvents)
+    //     setRecentEvents(latestEvents);
+    //     // console.log("latestEvents: ", latestEvents)
+    // }
     const handleDataForPieChart = (numCameras, numIots) => {
         const data = [
             {
@@ -169,22 +169,22 @@ export default function Dashboard({ route, navigation }) {
         ];
         setDataPieChart(data);
     }
-    const mapperIotTypes = (iotTypes, iotDevicesConfig) => {
-        let iotTypeInfo = [];
-        for (let i = 0; i < iotTypes.length; i++) {
-            let iotDevicesOfType = [];
-            for (let j = 0; j < iotDevicesConfig.length; j++) {
-                if (iotDevicesConfig[j]["connect_iot_type"] == iotTypes[i]["id"]) {
-                    iotDevicesOfType.push(iotDevicesConfig[j]);
-                }
-            }
-            // console.log("type ", iotTypes[i].id, ": ", iotDevicesOfType)
-            iotTypeInfo.push({ "size": iotDevicesOfType.length, "iot_type_name": iotTypes[i].iot_type_name, "image_url": iotTypes[i].image_url });
-        }
+    // const mapperIotTypes = (iotTypes, iotDevicesConfig) => {
+    //     let iotTypeInfo = [];
+    //     for (let i = 0; i < iotTypes.length; i++) {
+    //         let iotDevicesOfType = [];
+    //         for (let j = 0; j < iotDevicesConfig.length; j++) {
+    //             if (iotDevicesConfig[j]["connect_iot_type"] == iotTypes[i]["id"]) {
+    //                 iotDevicesOfType.push(iotDevicesConfig[j]);
+    //             }
+    //         }
+    //         // console.log("type ", iotTypes[i].id, ": ", iotDevicesOfType)
+    //         iotTypeInfo.push({ "size": iotDevicesOfType.length, "iot_type_name": iotTypes[i].iot_type_name, "image_url": iotTypes[i].image_url });
+    //     }
 
-        // console.log("iotTypeInfo: ", iotTypeInfo)
-        setTotalIotTypesInfo(iotTypeInfo);
-    }
+    //     // console.log("iotTypeInfo: ", iotTypeInfo)
+    //     setTotalIotTypesInfo(iotTypeInfo);
+    // }
 
 
     useEffect(() => {
@@ -247,10 +247,10 @@ export default function Dashboard({ route, navigation }) {
                                                 // setMarkers(mapperAreas);
                                                 // console.log("mapperDevices dashboard: ", mapperIoTMaps, mapperCameraMaps)
                                                 // mapperRecentEvents(mapperEvents, mapperIoTConfigs, eventTypes, mapperIoTMaps, mapperCameraMaps);
-                                                let currentEventsList = mapperEventsUtils(mapperEvents, mapperIoTConfigs, eventTypes, mapperIoTMaps, mapperCameraMaps, mapperAreas, mapperBuildings, mapperFloors, mapperIoTTypes);
+                                                let currentEventsList = mapperEventsUtils(mapperEvents, mapperIoTConfigs, eventTypes, mapperIoTMaps, mapperCameraMaps, mapperAreas, mapperBuildings, mapperFloors, mapperIoTTypes, 3);
                                                 setRecentEvents(currentEventsList);
 
-                                                mapperIotTypes(mapperIoTTypes, mapperIoTConfigs);
+                                                // mapperIotTypes(mapperIoTTypes, mapperIoTConfigs);
 
                                                 handleDataForPieChart(mapperCameraMaps.length, mapperIoTMaps.length);
                                             })

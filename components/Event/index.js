@@ -23,6 +23,7 @@ import { FloorAPI } from "../../apis/FloorAPI";
 import { mapperListIOTTypeFromDatabaseToFE, mapperIOTConfigListFromDatabaseToFE, mapperListAreaFromDatabaseToFE, mapperListBuildingFromDatabaseToFE, mapperListCameraConfigurationFromDatabaseToFE, mapperListDeviceFromDatabaseToFE, mapperListFloorFromDatabaseToFE, mapperEventDetailFromDatabaseToFE, mapperListEventDetailFromDatabaseToFE } from "../../utils/mapper/configuration";
 import { EventTypeAPI } from "../../apis/EventType";
 import { useDispatch, useSelector } from "react-redux";
+import { mapperEventsUtils } from "../../utils/mapper/mapperEvents";
 
 
 export default function Event({ navigation }) {
@@ -46,11 +47,13 @@ export default function Event({ navigation }) {
     const [iotDevices, setIotDevices] = useState([]);           // map
     const [cameraDevices, setCameraDevices] = useState([]);     // map
     const [areasList, setAreasList] = useState([]);
-    const [buidingsList, setBuildingsList] = useState([]);
-    const [totalIotTypesInfo, setTotalIotTypesInfo] = useState([]);
+    const [buildingsList, setBuildingsList] = useState([]);
+    const [floorsList, setFloorsList] = useState([]);
+    // const [totalIotTypesInfo, setTotalIotTypesInfo] = useState([]);
     const [eventsForFlatList, setEventsForFlatList] = useState([]);
     const [iotConfigurations, setIotConfigurations] = useState([]);
     const [eventTypes, setEventTypes] = useState([]);
+    const [iotTypes, setIotsType] = useState([]);
     const FlatListItem = (item, index) => {
         return <TouchableOpacity onPress={() => navigation.navigate('EventDetail', item,)}>
             <View style={styles.itemBlock}>
@@ -115,7 +118,9 @@ export default function Event({ navigation }) {
 
         let currentEventsList = originalEventsListRedux;
         let mapperEvents = mapperListEventDetailFromDatabaseToFE(currentEventsList, iotConfigurations);
-        mapperRecentEvents(mapperEvents, iotConfigurations, eventTypes, iotDevices, cameraDevices);
+        // mapperRecentEvents(mapperEvents, iotConfigurations, eventTypes, iotDevices, cameraDevices);
+        let currentEventsListMapperUtils = mapperEventsUtils(mapperEvents, iotConfigurations, eventTypes, iotDevices, cameraDevices, areasList, buildingsList, floorsList, iotTypes, mapperEvents.length);
+        setEventsForFlatList(currentEventsListMapperUtils)
     }
     const helperDateISO = (date) => {
         let convertDate = new Date(date).toISOString();
@@ -156,68 +161,70 @@ export default function Event({ navigation }) {
         // console.log("filtering date event: ", currentEventsList);
 
         let mapperEvents = mapperListEventDetailFromDatabaseToFE(currentEventsList, iotConfigurations);
-        mapperRecentEvents(mapperEvents, iotConfigurations, eventTypes, iotDevices, cameraDevices);
+        // mapperRecentEvents(mapperEvents, iotConfigurations, eventTypes, iotDevices, cameraDevices);
+        let currentEventsListMapperUtils = mapperEventsUtils(mapperEvents, iotConfigurations, eventTypes, iotDevices, cameraDevices, areasList, buildingsList, floorsList, iotTypes, mapperEvents.length);
+        setEventsForFlatList(currentEventsListMapperUtils)
 
         // setEventsList(currentEventsList);
     }
-    const mapperRecentEvents = (events, iotConfigs = [], eventTypes, iotMaps, cameraMaps) => {
-        let devicesList = iotMaps.concat(cameraMaps);
-        let latestEvents = [];
-        for (let i = 0; i < events.length; i++) {
-            // console.log("events[i]: ", events[i])
-            let zone = events[i]['zone'];
-            let event_name = '', device_name = '', address = '', id_iot_config = '';
-            for (let i = 0; i < iotConfigs.length; i++) {
-                if (zone == iotConfigs[i]['zone']) {
-                    let connect_event_type = iotConfigs[i]['connect_event_type'];
-                    for (let j = 0; j < eventTypes.length; j++) {
-                        if (eventTypes[j].id == connect_event_type || eventTypes[j]._id == connect_event_type) {
-                            event_name = eventTypes[j].event_name;
-                            break;
-                        }
-                    }
-                    device_name = iotConfigs[i].name;
-                    id_iot_config = iotConfigs[i].id;
-                    break;
-                }
-            }
+    // const mapperRecentEvents = (events, iotConfigs = [], eventTypes, iotMaps, cameraMaps) => {
+    //     let devicesList = iotMaps.concat(cameraMaps);
+    //     let latestEvents = [];
+    //     for (let i = 0; i < events.length; i++) {
+    //         // console.log("events[i]: ", events[i])
+    //         let zone = events[i]['zone'];
+    //         let event_name = '', device_name = '', address = '', id_iot_config = '';
+    //         for (let i = 0; i < iotConfigs.length; i++) {
+    //             if (zone == iotConfigs[i]['zone']) {
+    //                 let connect_event_type = iotConfigs[i]['connect_event_type'];
+    //                 for (let j = 0; j < eventTypes.length; j++) {
+    //                     if (eventTypes[j].id == connect_event_type || eventTypes[j]._id == connect_event_type) {
+    //                         event_name = eventTypes[j].event_name;
+    //                         break;
+    //                     }
+    //                 }
+    //                 device_name = iotConfigs[i].name;
+    //                 id_iot_config = iotConfigs[i].id;
+    //                 break;
+    //             }
+    //         }
 
-            for (let i = 0; i < devicesList.length; i++) {
-                if (devicesList[i].type == 'iot' && devicesList[i].connect_iot == id_iot_config) {
-                    address = devicesList[i].address;
-                    break;
-                }
-            }
+    //         for (let i = 0; i < devicesList.length; i++) {
+    //             if (devicesList[i].type == 'iot' && devicesList[i].connect_iot == id_iot_config) {
+    //                 address = devicesList[i].address;
+    //                 break;
+    //             }
+    //         }
 
-            let created_at = new Date(events[i].created_at).toISOString();
-            latestEvents.push({
-                ...events[i],
-                event_name,
-                device_name,
-                address,
-                created_at,
-                // zone: zone,
-                key: events[i].id,
-                video_url: events[i].detection_image_url ? events[i].detection_image_url : 'https://www.datasciencecentral.com/wp-content/uploads/2021/10/9712908078.jpeg'
-            })
-        }
+    //         let created_at = new Date(events[i].created_at).toISOString();
+    //         latestEvents.push({
+    //             ...events[i],
+    //             event_name,
+    //             device_name,
+    //             address,
+    //             created_at,
+    //             // zone: zone,
+    //             key: events[i].id,
+    //             video_url: events[i].detection_image_url ? events[i].detection_image_url : 'https://www.datasciencecentral.com/wp-content/uploads/2021/10/9712908078.jpeg'
+    //         })
+    //     }
 
-        setEventsForFlatList(latestEvents);
-    }
-    const mapperIotTypes = (iotTypes, iotDevicesConfig) => {
-        let iotTypeInfo = [];
-        for (let i = 0; i < iotTypes.length; i++) {
-            let iotDevicesOfType = [];
-            for (let j = 0; j < iotDevicesConfig.length; j++) {
-                if (iotDevicesConfig[j]["connect_iot_type"] == iotTypes[i]["id"]) {
-                    iotDevicesOfType.push(iotDevicesConfig[j]);
-                }
-            }
-            iotTypeInfo.push({ "size": iotDevicesOfType.length, "iot_type_name": iotTypes[i].iot_type_name, "image_url": iotTypes[i].image_url });
-        }
+    //     setEventsForFlatList(latestEvents);
+    // }
+    // const mapperIotTypes = (iotTypes, iotDevicesConfig) => {
+    //     let iotTypeInfo = [];
+    //     for (let i = 0; i < iotTypes.length; i++) {
+    //         let iotDevicesOfType = [];
+    //         for (let j = 0; j < iotDevicesConfig.length; j++) {
+    //             if (iotDevicesConfig[j]["connect_iot_type"] == iotTypes[i]["id"]) {
+    //                 iotDevicesOfType.push(iotDevicesConfig[j]);
+    //             }
+    //         }
+    //         iotTypeInfo.push({ "size": iotDevicesOfType.length, "iot_type_name": iotTypes[i].iot_type_name, "image_url": iotTypes[i].image_url });
+    //     }
 
-        setTotalIotTypesInfo(iotTypeInfo);
-    }
+    //     setTotalIotTypesInfo(iotTypeInfo);
+    // }
 
 
     useEffect(() => {
@@ -260,7 +267,6 @@ export default function Event({ navigation }) {
                                                 let mapperFloors = mapperListFloorFromDatabaseToFE(floors, mapperBuildings);
                                                 let devices = cameraMaps.concat(iotMaps);
                                                 let mapperDevices = mapperListDeviceFromDatabaseToFE(devices, mapperAreas, mapperBuildings, mapperFloors)
-
                                                 let mapperIoTMaps = mapperDevices.filter(item => item.type == 'iot')
                                                 let mapperCameraMaps = mapperDevices.filter(item => item.type == 'camera')
                                                 let mapperIoTConfigs = mapperIOTConfigListFromDatabaseToFE(iotConfigs);
@@ -274,15 +280,21 @@ export default function Event({ navigation }) {
 
                                                 setAreasList(mapperAreas);
                                                 setBuildingsList(mapperBuildings);
+                                                setFloorsList(mapperFloors)
                                                 setIotDevices(mapperIoTMaps);           // map
                                                 setCameraDevices(mapperCameraMaps);     // map
                                                 setEventTypes(eventTypes);
                                                 setIotConfigurations(mapperIoTConfigs);
+                                                setIotsType(mapperIoTTypes)
+
                                                 // setSeries(newSeries);
                                                 // setMarkers(mapperAreas);
                                                 // console.log("mapperDevices dashboard: ", mapperIoTMaps, mapperCameraMaps)
-                                                mapperRecentEvents(mapperEvents, mapperIoTConfigs, eventTypes, mapperIoTMaps, mapperCameraMaps);
-                                                mapperIotTypes(mapperIoTTypes, mapperIoTConfigs);
+                                                // mapperRecentEvents(mapperEvents, mapperIoTConfigs, eventTypes, mapperIoTMaps, mapperCameraMaps);
+                                                let currentEventsList = mapperEventsUtils(mapperEvents, mapperIoTConfigs, eventTypes, mapperIoTMaps, mapperCameraMaps, mapperAreas, mapperBuildings, mapperFloors, mapperIoTTypes, mapperEvents.length);
+                                                setEventsForFlatList(currentEventsList)
+
+                                                // mapperIotTypes(mapperIoTTypes, mapperIoTConfigs);
 
                                                 // handleDataForPieChart(mapperCameraMaps.length, mapperIoTMaps.length);
                                             })

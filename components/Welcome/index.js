@@ -18,10 +18,15 @@ import { EventAPI } from "../../apis/EventAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { getEventsList, updateOriginalEventsList } from "../../reducers/eventReducer";
 
+// const ip = require('ip');
+
+
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
 
 export default function Welcome({ navigation }) {
+
+    // console.log("ip address: ", ip.address('localhost', 'ipv4'))
 
     const dispatch = useDispatch();
     const eventsListRedux = useSelector(state => state.event.eventsList);
@@ -110,7 +115,7 @@ export default function Welcome({ navigation }) {
                 tabBarInactiveTintColor: 'grey',
             })}
         >
-            <Tab.Screen name="Dashboard" component={Dashboard} options={{ title: "Dashboard" }} initialParams={{ eventsList: eventsList }} />
+            <Tab.Screen name="Dashboard" component={Dashboard} options={{ title: "Dashboard" }} />
             <Tab.Screen name="MonitorVideo" component={MonitorVideo} options={{ title: "MonitorVideo" }} />
             <Tab.Screen name="Event" component={Event} options={{ title: "Event" }} />
             {/* <Tab.Screen name="Configuration" component={Configuration} options={{ title: "Configuration" }} /> */}
