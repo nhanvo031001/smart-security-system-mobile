@@ -6,7 +6,6 @@ export const EventAPI = {
             url: `/api/events`,
             method: "GET",
         })
-
         return response.data
     },
 

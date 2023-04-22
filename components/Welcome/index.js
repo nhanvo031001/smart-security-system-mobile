@@ -70,7 +70,7 @@ export default function Welcome({ navigation }) {
         // }
 
         EventAPI.getAll().then(res => {
-            console.log("eventst list WELCOME: ", res.data.events);
+            // console.log("eventst list WELCOME: ", res.data.events);
             dispatch(getEventsList(res.data.events));
             dispatch(updateOriginalEventsList(res.data.events));
             setEventsList(res.data.events);

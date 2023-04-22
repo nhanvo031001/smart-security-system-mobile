@@ -24,6 +24,7 @@ import { mapperListIOTTypeFromDatabaseToFE, mapperIOTConfigListFromDatabaseToFE,
 import { EventTypeAPI } from "../../apis/EventType";
 import { useDispatch, useSelector } from "react-redux";
 import { getEventsList } from "../../reducers/eventReducer";
+import { mapperEventsUtils } from "../../utils/mapper/mapperEvents";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -245,7 +246,10 @@ export default function Dashboard({ route, navigation }) {
                                                 // setSeries(newSeries);
                                                 // setMarkers(mapperAreas);
                                                 // console.log("mapperDevices dashboard: ", mapperIoTMaps, mapperCameraMaps)
-                                                mapperRecentEvents(mapperEvents, mapperIoTConfigs, eventTypes, mapperIoTMaps, mapperCameraMaps);
+                                                // mapperRecentEvents(mapperEvents, mapperIoTConfigs, eventTypes, mapperIoTMaps, mapperCameraMaps);
+                                                let currentEventsList = mapperEventsUtils(mapperEvents, mapperIoTConfigs, eventTypes, mapperIoTMaps, mapperCameraMaps, mapperAreas, mapperBuildings, mapperFloors, mapperIoTTypes);
+                                                setRecentEvents(currentEventsList);
+
                                                 mapperIotTypes(mapperIoTTypes, mapperIoTConfigs);
 
                                                 handleDataForPieChart(mapperCameraMaps.length, mapperIoTMaps.length);
