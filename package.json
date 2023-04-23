@@ -19,6 +19,7 @@
     "expo": "~48.0.4",
     "expo-av": "~13.2.1",
     "expo-status-bar": "~1.4.4",
+    "ion-sdk-js": "^1.8.2",
     "ip": "^1.1.8",
     "metro-config": "^0.75.1",
     "moment": "^2.29.4",
@@ -49,6 +50,7 @@
     "react-native-tree-select": "^2.0.9",
     "react-native-vector-icons": "^9.2.0",
     "react-native-vlc-media-player": "^1.0.51",
+    "react-native-webrtc": "^111.0.0",
     "react-navigation": "^4.4.4",
     "react-redux": "^8.0.5",
     "socket.io-client": "^4.6.1"

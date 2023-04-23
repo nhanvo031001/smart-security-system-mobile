@@ -2,7 +2,7 @@ import axios from "axios"
 
 export const api = axios.create({
     // baseURL: "https://pokeapi.co/api/v2",
-    baseURL: "http://192.168.20.100:3001",
+    baseURL: "http://192.168.2.51:3001",
 })
 
 // defining a custom error handler for all APIs

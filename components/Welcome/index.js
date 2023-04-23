@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import { EventAPI } from "../../apis/EventAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { getEventsList, updateOriginalEventsList } from "../../reducers/eventReducer";
+import VideoViewLivestream from "../VideoViewLivestream";
 
 // const ip = require('ip');
 
@@ -107,6 +108,8 @@ export default function Welcome({ navigation }) {
                         iconName = focused ? "notifications" : "notifications";
                     } else if (route.name === "MonitorVideo") {
                         iconName = focused ? "videocam-outline" : "videocam-outline";
+                    } else if (route.name === "VideoViewLivestream") {
+                        iconName = focused ? "bandage-outline" : "bandage-outline";
                     }
                     return <Ionicons name={iconName} color={color} size={24} />
                 },
@@ -123,6 +126,7 @@ export default function Welcome({ navigation }) {
             {/*<Tab.Screen name="Profile" component={Report} options={{ title: "Profile" }} />*/}
             <Tab.Screen name="Notifications" component={Notifications} options={{ title: "Notifications" }} />
             <Tab.Screen name="Personal" component={Personal} options={{ title: "Personal" }} />
+            <Tab.Screen name="VideoViewLivestream" component={VideoViewLivestream} options={{ title: "VideoViewLivestream" }} />
             {/* <Tab.Screen name="VideoView" component={VideoView} options={{ title: "VideoView" }} /> */}
         </Tab.Navigator>
 
